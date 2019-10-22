@@ -1,21 +1,19 @@
 <template>
   <div class="header">
     <el-row type="flex" align="middle">
-      <el-col :span="2" :offset="2">
-        <i class="el-icon-box header-logo"></i>
-      </el-col>
-      <el-col :span="18">
+      <el-col :span="18" :offset="3" class="header-col">
         <el-menu :default-active="activeIndex"
                 class="header-menu"
                 mode="horizontal"
                 background-color="#eee"
                 @select="handleSelect">
-        <el-menu-item index="1">主页</el-menu-item>
-        <el-menu-item index="2">笔记</el-menu-item>
+          <img :src="logo" class="header-logo">
+          <el-menu-item index="/">主页</el-menu-item>
+          <el-menu-item index="/moodlist">mood</el-menu-item>
+          <el-menu-item index="/note">笔记</el-menu-item>
       </el-menu>
       </el-col>
     </el-row>
-
   </div>
 </template>
 
@@ -23,20 +21,42 @@
 export default {
   data () {
     return {
-      activeIndex: '1'
+      activeIndex: '',
+      logo: require('@/assets/img/logo.png')
     }
   },
   methods: {
-    handleSelect (key, keyPath) {
-      console.log(key, keyPath)
+    handleSelect (key) {
+      if (this.activeIndex === key) {
+        return
+      }
+      this.activeIndex = key
+      this.$router.push(key)
     }
+  },
+  mounted () {
+    this.activeIndex = this.$route.path
   }
 }
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 .header
+  z-index 2000
+  position fixed
+  top 0
+  width 100%
+  height 61px
   background #eee
-  .header-logo
-    font-size 45px
+  .header-col
+    .header-menu
+      position relative
+      max-width 960px
+      margin auto
+      .header-logo
+        outline none
+        position absolute
+        left -70px
+        top 10px
+        z-index 500
 </style>
