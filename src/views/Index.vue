@@ -15,5 +15,7 @@ export default {
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" sccped>
-
+.index
+  max-width 960px
+  margin 15px auto 0 auto
 </style>

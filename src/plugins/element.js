@@ -20,7 +20,9 @@ import {
   Image,
   Input,
   Collapse,
-  CollapseItem
+  CollapseItem,
+  Link,
+  Alert
 } from 'element-ui'
 
 Vue.use(Button)
@@ -43,5 +45,7 @@ Vue.use(Image)
 Vue.use(Input)
 Vue.use(Collapse)
 Vue.use(CollapseItem)
+Vue.use(Link)
+Vue.use(Alert)
 
 Vue.use(Loading.directive)

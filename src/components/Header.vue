@@ -7,7 +7,7 @@
                 mode="horizontal"
                 background-color="#eee"
                 @select="handleSelect">
-          <img :src="logo" class="header-logo">
+          <img :src="logo" class="header-logo" @click="logoClick">
           <el-menu-item index="/">主页</el-menu-item>
           <el-menu-item index="/moodlist">mood</el-menu-item>
           <el-menu-item index="/note">笔记</el-menu-item>
@@ -22,7 +22,8 @@ export default {
   data () {
     return {
       activeIndex: '',
-      logo: require('@/assets/img/logo.png')
+      logo: require('@/assets/img/logo.png'),
+      num: 0
     }
   },
   methods: {
@@ -32,6 +33,14 @@ export default {
       }
       this.activeIndex = key
       this.$router.push(key)
+    },
+    logoClick () {
+      this.num++
+      if (this.num === 5) {
+        this.activeIndex = ''
+        this.num = 0
+        this.$router.push('/xianyu')
+      }
     }
   },
   mounted () {
