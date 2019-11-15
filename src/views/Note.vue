@@ -1,108 +1,92 @@
 <template>
-  <div class="note">
-    <div id="editor">
-      <p>测试用编辑器，暂无上传功能</p>
+<div class="note-view">
+  <div class="loading" v-show="!showNote" v-loading="!showNote"></div>
+  <div class="not-found" v-if="notFound">404</div>
+  <div class="note" v-if="showNote && !notFound">
+    <div class="title">{{note.title}}</div>
+    <div class="subheading">
+      <i class="icon1 el-icon-date"></i>
+      <div class="time">{{note.time.split(' ')[0]}}</div>
+      <i class="icon2 el-icon-view"></i>
+      <div class="read">{{note.read}}</div>
     </div>
-    <el-divider></el-divider>
-    <el-button @click="click">test</el-button>
-    <el-divider></el-divider>
-    <div v-html="text"></div>
+    <div v-html="note.text" v-highlight></div>
   </div>
+</div>
 </template>
 
 <script type="text/ecmascript-6">
-import E from 'wangeditor'
+import { getNote } from '@/api/store'
 
 export default {
+  name: 'note',
   data () {
     return {
-      text: ''
+      showNote: false,
+      notFound: false,
+      note: {}
     }
   },
   methods: {
-    click () {
-      this.text = this.editor.txt.html()
+    _getNote (topic, id) {
+      this.showNote = false
+      this.notFound = false
+      getNote(topic, id).then((res) => {
+        if (res.status === 200) {
+          if (res.data.length > 0) {
+            this.note = res.data[0]
+            this.showNote = true
+          } else {
+            this.showNote = true
+            this.notFound = true
+          }
+        }
+      })
     }
   },
-  mounted () {
-    this.editor = new E('#editor')
-    this.editor.customConfig.uploadImgServer = 'https://www.feizhouxianyu.cn:4001/upload'
-    this.editor.customConfig.uploadFileName = 'avatar'
-    this.editor.customConfig.menus = [
-      // 'head', // 标题
-      'bold', // 粗体
-      'fontSize', // 字号
-      'fontName', // 字体
-      'italic', // 斜体
-      'underline', // 下划线
-      'strikeThrough', // 删除线
-      'foreColor', // 文字颜色
-      'backColor', // 背景颜色
-      'link', // 插入链接
-      // 'list', // 列表
-      'justify', // 对齐方式
-      'quote', // 引用
-      // 'emoticon', // 表情
-      // 'image', // 插入图片
-      'table', // 表格
-      // 'video', // 插入视频
-      'code', // 插入代码
-      'undo', // 撤销
-      'redo' // 重复
-    ]
-    this.editor.create()
+  created () {
+    this._getNote(this.$route.params.topic, this.$route.params.id)
+  },
+  watch: {
+    $route (to, from) {
+      if (to.params.topic && to.params.id) {
+        this._getNote(this.$route.params.topic, this.$route.params.id)
+      }
+    }
   }
 }
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
-/* table 样式 */
-table {
-  border-top: 1px solid #ccc;
-  border-left: 1px solid #ccc;
-}
-table td,
-table th {
-  border-bottom: 1px solid #ccc;
-  border-right: 1px solid #ccc;
-  padding: 3px 5px;
-}
-table th {
-  border-bottom: 2px solid #ccc;
-  text-align: center;
-}
+<style lang="stylus" rel="stylesheet/stylus" scoped>
+@import '~@/assets/style/note.css'
 
-/* blockquote 样式 */
-blockquote {
-  display: block;
-  border-left: 8px solid #d0e5f2;
-  padding: 5px 10px;
-  margin: 10px 0;
-  line-height: 1.4;
-  font-size: 100%;
-  background-color: #f1f1f1;
-}
-
-/* code 样式 */
-code {
-  display: inline-block;
-  *display: inline;
-  *zoom: 1;
-  background-color: #f1f1f1;
-  border-radius: 3px;
-  padding: 3px 5px;
-  margin: 0 3px;
-}
-pre code {
-  display: block;
-}
-
-/* ul ol 样式 */
-ul, ol {
-  margin: 10px 0 10px 20px;
-}
-
-.note
-  max-width 960px
-  margin 15px auto
+.note-view
+  height calc(100vh - 61px)
+  .loading
+    height calc(100vh - 61px - 61px - 30px)
+  .not-found
+    max-width 960px
+    margin 15px auto 0 auto
+  .note
+    max-width 960px
+    margin 15px auto 0 auto
+    .title
+      font-size 40px
+    .subheading
+      display flex
+      align-items center
+      .time
+        font-size 18px
+        font-weight lighter
+        margin-right 15px
+        color #777
+      .read
+        font-size 18px
+        font-weight lighter
+      .icon1
+        font-size 15px
+        margin-right 5px
+      .icon2
+        font-size 17px
+        margin-right 5px
 </style>

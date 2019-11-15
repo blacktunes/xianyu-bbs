@@ -1,20 +1,23 @@
 <template>
   <div class="index">
     <message></message>
-    <p>↑ 可实时更新的留言板/聊天室</p>
+    <note></note>
   </div>
 </template>
 
 <script>
 import Message from '@/components/Index/Message'
+import Note from '@/components/Index/Note'
+
 export default {
   components: {
-    Message
+    Message,
+    Note
   }
 }
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus" sccped>
+<style lang="stylus" rel="stylesheet/stylus" scoped>
 .index
   max-width 960px
   margin 15px auto 0 auto

@@ -22,7 +22,12 @@ import {
   Collapse,
   CollapseItem,
   Link,
-  Alert
+  Alert,
+  Form,
+  FormItem,
+  Select,
+  Option,
+  Progress
 } from 'element-ui'
 
 Vue.use(Button)
@@ -47,5 +52,10 @@ Vue.use(Collapse)
 Vue.use(CollapseItem)
 Vue.use(Link)
 Vue.use(Alert)
+Vue.use(Form)
+Vue.use(FormItem)
+Vue.use(Select)
+Vue.use(Option)
+Vue.use(Progress)
 
 Vue.use(Loading.directive)

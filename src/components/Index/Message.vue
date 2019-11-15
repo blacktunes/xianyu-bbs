@@ -63,14 +63,13 @@ export default {
     },
     _getMessage () {
       getMessage().then((res) => {
-        console.log(res)
         this.messageList = res.data.message
       })
     },
     refresh () {
       this.timer = setTimeout(() => {
         this.$forceUpdate()
-        console.log('refresh')
+        // console.log('refresh')
         this.refresh()
       }, 1000 * 60)
     }
@@ -79,16 +78,15 @@ export default {
     // 建立连接自动调用connect
     connect: function () {
       // 与socket.io连接后回调
-      console.log('conn')
+      // console.log('conn')
     },
     connect_error: () => {
-      console.log('connErr')
+      // console.log('connErr')
     },
     disconnect: () => {
-      console.log('disconn')
+      // console.log('disconn')
     },
     receiveMessage: function (data) {
-      console.log(data)
       let temp = data
       if (this.messageList.length > 1) {
         temp.id = this.messageList[0].id + 1 || 0
@@ -102,11 +100,11 @@ export default {
     this._getMessage()
   },
   activated () {
-    console.log('activated')
+    // console.log('activated')
     this.refresh()
   },
   deactivated () {
-    console.log('deactivated')
+    // console.log('deactivated')
     if (this.timer) {
       clearTimeout(this.timer)
       this.timer = null

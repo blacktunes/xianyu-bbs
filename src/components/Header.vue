@@ -8,9 +8,11 @@
                 background-color="#eee"
                 @select="handleSelect">
           <img :src="logo" class="header-logo" @click="logoClick">
-          <el-menu-item index="/">主页</el-menu-item>
-          <el-menu-item index="/moodlist">mood</el-menu-item>
-          <el-menu-item index="/note">笔记</el-menu-item>
+          <el-menu-item index="/">Home</el-menu-item>
+          <el-menu-item index="/note/vue">VUE</el-menu-item>
+          <el-menu-item index="/note/node">Node</el-menu-item>
+          <el-menu-item index="/note/other">Other</el-menu-item>
+          <el-menu-item index="/mood">Mood</el-menu-item>
       </el-menu>
       </el-col>
     </el-row>
@@ -18,6 +20,8 @@
 </template>
 
 <script type="text/ecmascript-6">
+import { mapMutations, mapState } from 'vuex'
+
 export default {
   data () {
     return {
@@ -26,25 +30,53 @@ export default {
       num: 0
     }
   },
+  computed: {
+    ...mapState([
+      'xianyu'
+    ])
+  },
   methods: {
+    ...mapMutations({
+      setXianyu: 'SET_XIANYU'
+    }),
     handleSelect (key) {
-      if (this.activeIndex === key) {
+      if (this.activeIndex === key && !this.$route.params.id) {
         return
       }
       this.activeIndex = key
       this.$router.push(key)
     },
     logoClick () {
-      this.num++
-      if (this.num === 5) {
-        this.activeIndex = ''
-        this.num = 0
-        this.$router.push('/xianyu')
+      if (this.$route.path === '/input') {
+        return
+      }
+      if (this.xianyu) {
+        this.$router.push('/input')
+      } else {
+        this.num++
+        if (this.num === 5) {
+          this.activeIndex = ''
+          this.setXianyu(true)
+          this.$router.push('/input')
+        }
       }
     }
   },
   mounted () {
-    this.activeIndex = this.$route.path
+    if (this.$route.params.topic && this.$route.params.id) {
+      this.activeIndex = `/note/${this.$route.params.topic}`
+    } else {
+      this.activeIndex = this.$route.path
+    }
+  },
+  watch: {
+    $route (to, from) {
+      if (to.params.topic && to.params.id) {
+        this.activeIndex = `/note/${to.params.topic}`
+      } else {
+        this.activeIndex = to.path
+      }
+    }
   }
 }
 </script>
