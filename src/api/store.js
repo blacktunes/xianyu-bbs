@@ -59,12 +59,43 @@ export function addNote (form) {
   })
 }
 
+export function editNote (form) {
+  return axios({
+    method: 'post',
+    url: `${serverUrl2}/editNote`,
+    params: {
+      id: form.id,
+      title: form.title,
+      author: form.author,
+      topic: form.topic,
+      text: form.text
+    }
+  })
+}
+
 export function getNoteList (topic) {
   return axios({
     method: 'post',
     url: `${serverUrl2}/getNoteList`,
     params: {
       topic
+    }
+  })
+}
+
+export function getBookNameList () {
+  return axios({
+    method: 'get',
+    url: `${serverUrl2}/getBookNameList`
+  })
+}
+
+export function getBookList (bookName) {
+  return axios({
+    method: 'post',
+    url: `${serverUrl2}/getBookList`,
+    params: {
+      bookName
     }
   })
 }

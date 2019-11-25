@@ -27,7 +27,8 @@ import {
   FormItem,
   Select,
   Option,
-  Progress
+  Progress,
+  Tree
 } from 'element-ui'
 
 Vue.use(Button)
@@ -57,5 +58,6 @@ Vue.use(FormItem)
 Vue.use(Select)
 Vue.use(Option)
 Vue.use(Progress)
+Vue.use(Tree)
 
 Vue.use(Loading.directive)

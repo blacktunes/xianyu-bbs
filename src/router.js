@@ -1,12 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Index from './views/Index'
-import Mood from './views/Mood'
-import Hide from './views/Hide'
-import Note from './views/Note'
-import Topic from './views/Topic'
-import Input from './views/Input'
-import Preview from './components/Input/Preview'
 import NotFound from './views/404'
 
 Vue.use(Router)
@@ -21,30 +15,31 @@ export default new Router({
     {
       path: '/mood',
       name: 'mood',
-      component: Mood
+      component: () => import('./views/Mood')
     },
     {
       path: '/input',
-      component: Input,
+      component: () => import('./views/Input'),
       children: [
         {
           path: 'preview',
-          component: Preview
+          component: () => import('./components/Input/Preview')
         }
       ]
     },
     {
       path: '/note/:topic',
-      component: Topic
+      component: () => import('./views/Topic')
     },
     {
+      name: 'note',
       path: '/note/:topic/:id',
-      component: Note
+      component: () => import('./views/Note')
     },
     {
       path: '/xianyu',
       name: 'xianyu',
-      component: Hide
+      component: () => import('./views/Hide')
     },
     {
       path: '*',

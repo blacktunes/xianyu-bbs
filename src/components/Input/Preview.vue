@@ -15,13 +15,17 @@
 
 <script type="text/ecmascript-6">
 import COS from 'cos-js-sdk-v5'
-import { addNote } from '@/api/store'
+import { addNote, editNote } from '@/api/store'
 
 export default {
   props: {
     form: {
       default: null,
       type: Object
+    },
+    isEdit: {
+      default: false,
+      type: Boolean
     },
     imgList: {
       default: () => [],
@@ -67,12 +71,21 @@ export default {
       this.$router.go(-1)
     },
     _addNote (form) {
-      addNote(form).then((res) => {
-        if (res.status === 200) {
-          this.$router.push(`/note/${this.form.topic}/${res.data.id}`)
-          this.$router.go(0)
-        }
-      })
+      if (this.isEdit) {
+        editNote(form).then((res) => {
+          if (res.status === 200) {
+            this.$router.push(`/note/${this.form.topic}/${this.form.id}`)
+            this.$router.go(0)
+          }
+        })
+      } else {
+        addNote(form).then((res) => {
+          if (res.status === 200) {
+            this.$router.push(`/note/${this.form.topic}/${res.data.id}`)
+            this.$router.go(0)
+          }
+        })
+      }
     }
   },
   created () {

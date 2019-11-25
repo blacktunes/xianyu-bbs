@@ -6,7 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     xianyu: false,
-    preview: {}
+    preview: {},
+    edit: {}
   },
   mutations: {
     SET_XIANYU (state, flag) {
@@ -14,6 +15,9 @@ export default new Vuex.Store({
     },
     SET_PREVIEW (state, object) {
       state.preview = object
+    },
+    SET_EDIT (state, object) {
+      state.edit = object
     }
   },
   actions: {}

@@ -1,5 +1,9 @@
 <template>
   <div class="note">
+    <el-alert :title="alertText"
+              type="info"
+              :closable="false"
+              center></el-alert>
     <el-form :inline="true" label-position="top" :model="form" :rules="rules" ref="form" v-show="showForm">
       <div class="header">
         <el-form-item label="标题" class="title" prop="title" >
@@ -27,7 +31,7 @@
       </div>
       <el-divider class="divider"></el-divider>
     </el-form>
-    <router-view :form="form" :imgList="imgList"></router-view>
+    <router-view :form="form" :isEdit="isEdit" :imgList="imgList"></router-view>
     <div class="progress">
       <el-progress v-if="showProgress" :text-inside="true" :stroke-width="26" :percentage="uploadPercent" color="#aaa"></el-progress>
     </div>
@@ -68,13 +72,22 @@ export default {
           }
         ]
       },
-      topicList: []
+      topicList: [],
+      isEdit: false
     }
   },
   computed: {
     ...mapState([
-      'xianyu'
-    ])
+      'xianyu',
+      'edit'
+    ]),
+    alertText () {
+      if (this.isEdit) {
+        return '当前处于编辑模式，提交后将会修改原文章'
+      } else {
+        return '当前处于新建模式，提交后将会创建新文章'
+      }
+    }
   },
   methods: {
     // reset () {
@@ -92,7 +105,9 @@ export default {
       this.$refs[form].validate((valid) => {
         if (valid) {
           this.form.text = this.editor.txt.html()
-          this.form.time = new Date().toLocaleString('chinese', { hour12: false })
+          if (!this.isEdit) {
+            this.form.time = new Date().toLocaleString('chinese', { hour12: false })
+          }
           this.showForm = false
           this.$router.push('/input/preview')
         } else {
@@ -169,6 +184,15 @@ export default {
       'redo' // 重复
     ]
     this.editor.create()
+    if (this.$route.query.id) {
+      this.form.title = this.edit.title
+      this.form.author = this.edit.author
+      this.editor.txt.html(this.edit.text)
+      this.form.topic = this.edit.topic
+      this.form.time = this.edit.time
+      this.form.id = this.edit.id
+      this.isEdit = true
+    }
   },
   created () {
     this.cos = new COS({
@@ -182,14 +206,24 @@ export default {
   },
   activated () {
     this.showForm = true
+    if (!this.$route.query.id) {
+      this.isEdit = false
+    }
   },
   watch: {
     $route (to, from) {
       if (from.path === '/input/preview') {
         this.showForm = true
-      }
-      if (to.path === '/input' && !this.xianyu) {
+      } else if (to.path === '/input' && !this.xianyu) {
         this.$router.push('/')
+      } else if (from.name === 'note' && this.$route.query.id) {
+        this.form.title = this.edit.title
+        this.form.author = this.edit.author
+        this.editor.txt.html(this.edit.text)
+        this.form.topic = this.edit.topic
+        this.form.time = this.edit.time
+        this.form.id = this.edit.id
+        this.isEdit = true
       }
     }
   }

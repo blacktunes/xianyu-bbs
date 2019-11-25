@@ -39,10 +39,10 @@ export default {
       this.$router.push(`/note/${topic}/${id}`)
     },
     ellipsis (value) {
-      let temp = value.replace(/<img[^>]*>/g, '[图片]').replace(/<pre>.*?<\/pre>/is, '[代码块]')
-      if (temp.length > 300) {
-        return temp.slice(0, 100) + '...'
-      }
+      let temp = value.replace(/<img[^>]*>/g, '[图片]').replace(/<pre>.*?<\/pre>/isg, '[代码块]')
+      // if (temp.length > 200) {
+      //   return temp.slice(0, 200) + '...'
+      // }
       return temp
     },
     _getNoteList (topic) {
@@ -99,7 +99,11 @@ export default {
     .text
       font-size 15px !important
       overflow hidden
-      max-height 100px
+      max-height 140px
+      display -webkit-box
+      -webkit-line-clamp 6
+      -webkit-box-orient vertical
+      margin-bottom 8px
     .subheading
       display flex
       align-items center

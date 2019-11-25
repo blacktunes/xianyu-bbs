@@ -3,7 +3,7 @@
   <div class="loading" v-show="!showNote" v-loading="!showNote"></div>
   <div class="not-found" v-if="notFound">404</div>
   <div class="note" v-if="showNote && !notFound">
-    <div class="title">{{note.title}}</div>
+    <div class="title" @click="titleClick">{{note.title}}</div>
     <div class="subheading">
       <i class="icon1 el-icon-date"></i>
       <div class="time">{{note.time.split(' ')[0]}}</div>
@@ -17,6 +17,7 @@
 
 <script type="text/ecmascript-6">
 import { getNote } from '@/api/store'
+import { mapMutations } from 'vuex'
 
 export default {
   name: 'note',
@@ -24,10 +25,24 @@ export default {
     return {
       showNote: false,
       notFound: false,
-      note: {}
+      note: {},
+      num: 0
     }
   },
   methods: {
+    ...mapMutations({
+      setEdit: 'SET_EDIT',
+      setXianyu: 'SET_XIANYU'
+    }),
+    titleClick () {
+      this.num++
+      if (this.num === 5) {
+        this.num = 0
+        this.setXianyu(true)
+        this.setEdit(this.note)
+        this.$router.push({ path: '/input', query: { id: this.note.id } })
+      }
+    },
     _getNote (topic, id) {
       this.showNote = false
       this.notFound = false
