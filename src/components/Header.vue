@@ -13,6 +13,7 @@
           <el-menu-item index="/note/node">Node</el-menu-item>
           <el-menu-item index="/note/other">Other</el-menu-item>
           <el-menu-item index="/mood">Mood</el-menu-item>
+          <el-menu-item index="/timeline">Timeline</el-menu-item>
       </el-menu>
       </el-col>
     </el-row>

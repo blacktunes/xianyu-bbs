@@ -12,6 +12,10 @@
     </div>
     <div v-html="note.text" v-highlight></div>
   </div>
+  <el-card v-if="showNote && !notFound" shadow="never" class="card" :body-style="{ padding: '0px 20px' }">
+    <p>作者:{{note.author}}</p>
+    <p>最后修改于:{{note.lastEdit}}</p>
+  </el-card>
 </div>
 </template>
 
@@ -76,7 +80,7 @@ export default {
 @import '~@/assets/style/note.css'
 
 .note-view
-  height calc(100vh - 61px)
+  height calc(100vh - 61px - 15px)
   .loading
     height calc(100vh - 61px - 61px - 30px)
   .not-found
@@ -104,4 +108,6 @@ export default {
       .icon2
         font-size 17px
         margin-right 5px
+  .card
+    margin-bottom 20px
 </style>

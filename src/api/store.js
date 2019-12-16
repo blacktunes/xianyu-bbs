@@ -99,3 +99,10 @@ export function getBookList (bookName) {
     }
   })
 }
+
+export function getAllNote () {
+  return axios({
+    method: 'get',
+    url: `${serverUrl2}/getAllNote`
+  })
+}

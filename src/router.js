@@ -6,6 +6,8 @@ import NotFound from './views/404'
 Vue.use(Router)
 
 export default new Router({
+  // mode: 'history',
+  // base: '/',
   routes: [
     {
       path: '/',
@@ -35,6 +37,10 @@ export default new Router({
       name: 'note',
       path: '/note/:topic/:id',
       component: () => import('./views/Note')
+    },
+    {
+      path: '/timeline',
+      component: () => import('./views/Timeline')
     },
     {
       path: '/xianyu',

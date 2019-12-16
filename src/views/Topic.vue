@@ -1,7 +1,7 @@
 <template>
 <div class="topic">
   <div class="loading" v-show="!showNote" v-loading="!showNote"></div>
-  <div class="not-found" v-if="noteEmpty && !notFound">该分类暂无内容</div>
+  <div class="not-found" v-if="noteEmpty && !notFound && showNote">该分类暂无内容</div>
   <div class="not-found" v-if="notFound">404</div>
   <div v-for="item in noteList" :key="item.id">
     <el-card shadow="hover" :body-style="{ padding: '15px' }" class="note">
@@ -29,9 +29,13 @@ export default {
     return {
       topic: '',
       noteList: [],
-      noteEmpty: false,
       showNote: false,
       notFound: false
+    }
+  },
+  computed: {
+    noteEmpty () {
+      return this.noteList.length === 0
     }
   },
   methods: {
@@ -47,15 +51,14 @@ export default {
     },
     _getNoteList (topic) {
       this.showNote = false
-      this.noteEmpty = false
       getNoteList(topic).then((res) => {
-        if (res.data.length > 0) {
+        console.log(res)
+        if (res.data.ERR_CODE === 0) {
           this.showNote = true
-          this.noteList = res.data
+          this.noteList = res.data.noteList
         } else {
           this.showNote = true
-          this.noteEmpty = true
-          this.noteList = []
+          this.notFound = true
         }
       })
     }
@@ -69,12 +72,8 @@ export default {
       this.noteList = []
       this.notFound = false
       if (to.params.topic) {
-        if (['vue', 'node', 'other'].indexOf(to.params.topic) !== -1) {
-          this.topic = to.params.topic
-          this._getNoteList(this.topic)
-        } else {
-          this.notFound = true
-        }
+        this.topic = to.params.topic
+        this._getNoteList(this.topic)
       }
     }
   }

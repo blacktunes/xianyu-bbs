@@ -28,7 +28,9 @@ import {
   Select,
   Option,
   Progress,
-  Tree
+  Tree,
+  Timeline,
+  TimelineItem
 } from 'element-ui'
 
 Vue.use(Button)
@@ -59,5 +61,7 @@ Vue.use(Select)
 Vue.use(Option)
 Vue.use(Progress)
 Vue.use(Tree)
+Vue.use(Timeline)
+Vue.use(TimelineItem)
 
 Vue.use(Loading.directive)
