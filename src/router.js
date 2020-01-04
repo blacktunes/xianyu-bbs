@@ -6,8 +6,8 @@ import NotFound from './views/404'
 Vue.use(Router)
 
 export default new Router({
-  // mode: 'history',
-  // base: '/',
+  mode: 'history',
+  base: '/',
   routes: [
     {
       path: '/',
@@ -18,16 +18,6 @@ export default new Router({
       path: '/mood',
       name: 'mood',
       component: () => import('./views/Mood')
-    },
-    {
-      path: '/input',
-      component: () => import('./views/Input'),
-      children: [
-        {
-          path: 'preview',
-          component: () => import('./components/Input/Preview')
-        }
-      ]
     },
     {
       path: '/note/:topic',

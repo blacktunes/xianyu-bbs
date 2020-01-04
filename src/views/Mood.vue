@@ -65,9 +65,6 @@ export default {
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 .mood
-  max-width 960px
-  margin 15px auto
-  height calc(100vh - 61px - 30px)
   .loading
     height calc(100vh - 61px - 61px - 30px)
   .tip

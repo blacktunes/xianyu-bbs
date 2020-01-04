@@ -1,5 +1,5 @@
 <template>
-  <div class="hide">
+  <div>
     <el-alert title="欢迎来到里站，目前仅用于轻小说归档"
               type="info"
               :closable="false"
@@ -55,7 +55,5 @@ export default {
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-.hide
-  max-width 960px
-  margin 15px auto 0 auto
+
 </style>

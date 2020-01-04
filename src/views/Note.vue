@@ -3,7 +3,7 @@
   <div class="loading" v-show="!showNote" v-loading="!showNote"></div>
   <div class="not-found" v-if="notFound">404</div>
   <div class="note" v-if="showNote && !notFound">
-    <div class="title" @click="titleClick">{{note.title}}</div>
+    <div class="title">{{note.title}}</div>
     <div class="subheading">
       <i class="icon1 el-icon-date"></i>
       <div class="time">{{note.time.split(' ')[0]}}</div>
@@ -21,7 +21,6 @@
 
 <script type="text/ecmascript-6">
 import { getNote } from '@/api/store'
-import { mapMutations } from 'vuex'
 
 export default {
   name: 'note',
@@ -34,19 +33,6 @@ export default {
     }
   },
   methods: {
-    ...mapMutations({
-      setEdit: 'SET_EDIT',
-      setXianyu: 'SET_XIANYU'
-    }),
-    titleClick () {
-      this.num++
-      if (this.num === 5) {
-        this.num = 0
-        this.setXianyu(true)
-        this.setEdit(this.note)
-        this.$router.push({ path: '/input', query: { id: this.note.id } })
-      }
-    },
     _getNote (topic, id) {
       this.showNote = false
       this.notFound = false
@@ -65,13 +51,6 @@ export default {
   },
   created () {
     this._getNote(this.$route.params.topic, this.$route.params.id)
-  },
-  watch: {
-    $route (to, from) {
-      if (to.params.topic && to.params.id) {
-        this._getNote(this.$route.params.topic, this.$route.params.id)
-      }
-    }
   }
 }
 </script>
@@ -80,7 +59,6 @@ export default {
 @import '~@/assets/style/note.css'
 
 .note-view
-  height calc(100vh - 61px - 15px)
   .loading
     height calc(100vh - 61px - 61px - 30px)
   .not-found

@@ -1,8 +1,8 @@
 <template>
   <div class="show-note">
-    <el-row :gutter="10" class="show-note">
-      <transition-group name="el-zoom-in-top">
-      <el-col :span="8" class="note" v-for="item in showNoteList" :key="item.id">
+    <div v-for="(col, index) in showNoteList" :key="index" class="col">
+      <transition-group name="el-fade-in-linear">
+      <div class="note" v-for="item in col" :key="item.id">
         <el-card shadow="hover" :body-style="{ padding: '5px' }">
           <div slot="header">
             <el-link :underline="false" class="note-title" @click="noteClick(item.topic, item.id)">{{item.title}}</el-link>
@@ -10,9 +10,9 @@
           </div>
           <div class="note-text" v-html="ellipsis(item.text)" v-highlight></div>
         </el-card>
-      </el-col>
+      </div>
       </transition-group>
-    </el-row>
+    </div>
   </div>
 </template>
 
@@ -22,13 +22,13 @@ import { getShowNoteList } from '@/api/store'
 export default {
   data () {
     return {
-      showNoteList: []
+      showNoteList: [[], [], []]
     }
   },
   methods: {
     ellipsis (value) {
-      if (value.length > 300) {
-        return value.slice(0, 300) + '...'
+      if (value.length > 325) {
+        return value.slice(0, 325) + '<span>...</span>'
       }
       return value
     },
@@ -38,7 +38,14 @@ export default {
     _getShowNoteList () {
       getShowNoteList().then((res) => {
         if (res.status === 200) {
-          this.showNoteList = res.data.showNoteList
+          let temp = 0
+          res.data.showNoteList.forEach(item => {
+            this.showNoteList[temp].push(item)
+            temp++
+            if (temp > 2) {
+              temp = 0
+            }
+          })
         }
       })
     }
@@ -52,27 +59,31 @@ export default {
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 
 .show-note
-  max-width 960px
-  margin 15px auto 0 auto
-  .note
+  min-height 500px
+  display flex
+  flex-wrap wrap
+  .col
+    flex 0 0 33.333%
     overflow hidden
-    max-height 50vw
-    margin-top 5px
-   & >>> .el-card__header
-      padding 5px
-  .note-text
-    overflow hidden
-    font-size 14px
-    line-height 20px
-    & >>> code
-      color #000
-      font-weight lighter
-      font-size 12px
-      border-radius 3px
-      padding 3px 5px
-      width 100%
-      font-family: sans-serif
-      background #eee
+    .note
+      overflow hidden
+      max-height 500px
+      margin 5px
+    & >>> .el-card__header
+        padding 5px
+    .note-text
+      font-size 14px
+      line-height 20px
+      & >>> code
+        overflow hidden
+        color #000
+        font-weight lighter
+        font-size 12px
+        border-radius 3px
+        padding 3px 5px
+        width 100%
+        font-family: sans-serif
+        background #eee
 
 .note-title
   display block

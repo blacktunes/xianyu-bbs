@@ -10,6 +10,5 @@ export default {
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 .not-found
-  max-width 960px
   margin 15px auto 0 auto
 </style>

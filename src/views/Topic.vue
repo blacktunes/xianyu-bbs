@@ -52,10 +52,9 @@ export default {
     _getNoteList (topic) {
       this.showNote = false
       getNoteList(topic).then((res) => {
-        console.log(res)
         if (res.data.ERR_CODE === 0) {
           this.showNote = true
-          this.noteList = res.data.noteList
+          this.noteList = res.data.noteList.reverse()
         } else {
           this.showNote = true
           this.notFound = true
@@ -82,27 +81,23 @@ export default {
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 .topic
-  max-width 960px
-  margin 15px auto
-  height calc(100vh - 61px - 30px)
   .loading
     height calc(100vh - 61px - 61px - 30px)
   .not-found
     max-width 960px
     margin 15px auto 0 auto
   .note
-    margin-bottom 10px
+    margin 5px auto
     .title
       font-weight bold
       font-size 25px
     .text
       font-size 15px !important
       overflow hidden
-      max-height 140px
-      display -webkit-box
-      -webkit-line-clamp 6
-      -webkit-box-orient vertical
+      max-height 150px
       margin-bottom 8px
+      text-overflow ellipsis
+      white-space nowrap
     .subheading
       display flex
       align-items center

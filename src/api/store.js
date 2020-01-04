@@ -46,33 +46,6 @@ export function getTopic () {
   })
 }
 
-export function addNote (form) {
-  return axios({
-    method: 'post',
-    url: `${serverUrl2}/addNote`,
-    params: {
-      title: form.title,
-      author: form.author,
-      topic: form.topic,
-      text: form.text
-    }
-  })
-}
-
-export function editNote (form) {
-  return axios({
-    method: 'post',
-    url: `${serverUrl2}/editNote`,
-    params: {
-      id: form.id,
-      title: form.title,
-      author: form.author,
-      topic: form.topic,
-      text: form.text
-    }
-  })
-}
-
 export function getNoteList (topic) {
   return axios({
     method: 'post',
@@ -104,5 +77,12 @@ export function getAllNote () {
   return axios({
     method: 'get',
     url: `${serverUrl2}/getAllNote`
+  })
+}
+
+export function getUV () {
+  return axios({
+    method: 'get',
+    url: `${serverUrl2}/getUV`
   })
 }

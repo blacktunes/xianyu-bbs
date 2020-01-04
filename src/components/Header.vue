@@ -1,27 +1,23 @@
 <template>
   <div class="header">
-    <el-row type="flex" align="middle">
-      <el-col :span="18" :offset="3" class="header-col">
-        <el-menu :default-active="activeIndex"
-                class="header-menu"
-                mode="horizontal"
-                background-color="#eee"
-                @select="handleSelect">
-          <img :src="logo" class="header-logo" @click="logoClick">
-          <el-menu-item index="/">Home</el-menu-item>
-          <el-menu-item index="/note/vue">VUE</el-menu-item>
-          <el-menu-item index="/note/node">Node</el-menu-item>
-          <el-menu-item index="/note/other">Other</el-menu-item>
-          <el-menu-item index="/mood">Mood</el-menu-item>
-          <el-menu-item index="/timeline">Timeline</el-menu-item>
-      </el-menu>
-      </el-col>
-    </el-row>
+    <el-menu :default-active="activeIndex"
+            class="header-menu"
+            mode="horizontal"
+            background-color="#eee"
+            @select="handleSelect">
+      <img :src="logo" class="header-logo">
+      <el-menu-item index="/">Home</el-menu-item>
+      <el-menu-item index="/note/vue">VUE</el-menu-item>
+      <el-menu-item index="/note/node">Node</el-menu-item>
+      <el-menu-item index="/note/other">Other</el-menu-item>
+      <el-menu-item index="/mood">Mood</el-menu-item>
+      <el-menu-item index="/timeline">Timeline</el-menu-item>
+  </el-menu>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-import { mapMutations, mapState } from 'vuex'
+// import { mapMutations, mapState } from 'vuex'
 
 export default {
   data () {
@@ -31,37 +27,36 @@ export default {
       num: 0
     }
   },
-  computed: {
-    ...mapState([
-      'xianyu'
-    ])
-  },
+  // computed: {
+  //   ...mapState([
+  //     'xianyu'
+  //   ])
+  // },
   methods: {
-    ...mapMutations({
-      setXianyu: 'SET_XIANYU'
-    }),
+    // ...mapMutations({
+    //   setXianyu: 'SET_XIANYU'
+    // }),
     handleSelect (key) {
       if (this.activeIndex === key && !this.$route.params.id) {
         return
       }
       this.activeIndex = key
       this.$router.push(key)
-    },
-    logoClick () {
-      if (this.$route.path === '/input') {
-        return
-      }
-      if (this.xianyu) {
-        this.$router.push('/input')
-      } else {
-        this.num++
-        if (this.num === 5) {
-          this.activeIndex = ''
-          this.setXianyu(true)
-          this.$router.push('/input')
-        }
-      }
     }
+    // logoClick () {
+    //   if (this.$route.path === '/input') {
+    //     return
+    //   }
+    //   if (this.xianyu) {
+    //     this.$router.push('/input')
+    //   } else {
+    //     this.num++
+    //     if (this.num === 5) {
+    //       this.activeIndex = ''
+    //       this.setXianyu(true)
+    //     }
+    //   }
+    // }
   },
   mounted () {
     if (this.$route.params.topic && this.$route.params.id) {
@@ -90,15 +85,14 @@ export default {
   width 100%
   height 61px
   background #eee
-  .header-col
-    .header-menu
-      position relative
-      max-width 960px
-      margin auto
-      .header-logo
-        outline none
-        position absolute
-        left -70px
-        top 10px
-        z-index 500
+  .header-menu
+    position relative
+    max-width 960px
+    margin auto
+    .header-logo
+      outline none
+      position absolute
+      left -70px
+      top 10px
+      z-index 500
 </style>
