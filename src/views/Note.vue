@@ -6,21 +6,22 @@
     <div class="title">{{note.title}}</div>
     <div class="subheading">
       <i class="icon1 el-icon-date"></i>
-      <div class="time">{{note.time.split(' ')[0]}}</div>
-      <i class="icon2 el-icon-view"></i>
-      <div class="read">{{note.read}}</div>
+      <div class="time">{{note.time}}</div>
+      <i class="icon2 el-icon-view" v-if="note.read"></i>
+      <div class="read" v-if="note.read">{{note.read}}</div>
+      <div class="edit" v-if="note.lastEdit" @click="toEditlist(note.topic, note.id)">已编辑</div>
     </div>
     <div v-html="note.text" v-highlight></div>
   </div>
   <el-card v-if="showNote && !notFound" shadow="never" class="card" :body-style="{ padding: '0px 20px' }">
     <p>作者:{{note.author}}</p>
-    <p>最后修改于:{{note.lastEdit}}</p>
+    <p v-if="note.lastEdit">最后修改于:{{note.lastEdit}}</p>
   </el-card>
 </div>
 </template>
 
 <script type="text/ecmascript-6">
-import { getNote } from '@/api/store'
+import { getNote, getEdit } from '@/api/store'
 
 export default {
   name: 'note',
@@ -33,24 +34,37 @@ export default {
     }
   },
   methods: {
-    _getNote (topic, id) {
+    _getNote () {
       this.showNote = false
       this.notFound = false
-      getNote(topic, id).then((res) => {
-        if (res.status === 200) {
-          if (res.data.length > 0) {
-            this.note = res.data[0]
+      if (this.$route.params.e_id) {
+        getEdit(this.$route.params.e_id).then((res) => {
+          console.log(res)
+          if (res.status === 200) {
+            this.note = res.data.edit
             this.showNote = true
-          } else {
-            this.showNote = true
-            this.notFound = true
           }
-        }
-      })
+        })
+      } else {
+        getNote(this.$route.params.topic, this.$route.params.id).then((res) => {
+          if (res.status === 200) {
+            if (res.data.length > 0) {
+              this.note = res.data[0]
+              this.showNote = true
+            } else {
+              this.showNote = true
+              this.notFound = true
+            }
+          }
+        })
+      }
+    },
+    toEditlist (topic, id) {
+      this.$router.push(`/note/${topic}/${id}/edit`)
     }
   },
   created () {
-    this._getNote(this.$route.params.topic, this.$route.params.id)
+    this._getNote()
   }
 }
 </script>
@@ -86,6 +100,11 @@ export default {
       .icon2
         font-size 17px
         margin-right 5px
+      .edit
+        font-size 18px
+        font-weight lighter
+        margin-left 15px
+        color #777
   .card
     margin-bottom 20px
 </style>

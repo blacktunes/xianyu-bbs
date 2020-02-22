@@ -73,10 +73,10 @@ export function getBookList (bookName) {
   })
 }
 
-export function getAllNote () {
+export function getTimeLine () {
   return axios({
     method: 'get',
-    url: `${serverUrl2}/getAllNote`
+    url: `${serverUrl2}/getTimeLine`
   })
 }
 
@@ -84,5 +84,25 @@ export function getUV () {
   return axios({
     method: 'get',
     url: `${serverUrl2}/getUV`
+  })
+}
+
+export function getEditList (id) {
+  return axios({
+    method: 'post',
+    url: `${serverUrl2}/getEditList`,
+    params: {
+      id
+    }
+  })
+}
+
+export function getEdit (id) {
+  return axios({
+    method: 'post',
+    url: `${serverUrl2}/getEdit`,
+    params: {
+      id
+    }
   })
 }

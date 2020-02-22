@@ -59,11 +59,13 @@ export default {
     // }
   },
   mounted () {
-    if (this.$route.params.topic && this.$route.params.id) {
-      this.activeIndex = `/note/${this.$route.params.topic}`
-    } else {
-      this.activeIndex = this.$route.path
-    }
+    setTimeout(() => {
+      if (this.$route.params.topic && this.$route.params.id) {
+        this.activeIndex = `/${this.$route.params.topic}`
+      } else {
+        this.activeIndex = this.$route.path
+      }
+    }, 50)
   },
   watch: {
     $route (to, from) {

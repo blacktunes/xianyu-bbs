@@ -29,6 +29,14 @@ export default new Router({
       component: () => import('./views/Note')
     },
     {
+      path: '/note/:topic/:id/edit',
+      component: () => import('./components/Note/Editlist')
+    },
+    {
+      path: '/note/:topic/:id/edit/:e_id',
+      component: () => import('./views/Note')
+    },
+    {
       path: '/timeline',
       component: () => import('./views/Timeline')
     },

@@ -54,6 +54,5 @@ body
   .view-item
     max-width 960px
     min-width 768px
-    min-height 500px
     margin auto
 </style>
