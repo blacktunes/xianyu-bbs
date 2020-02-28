@@ -94,7 +94,7 @@ export default {
     .text
       font-size 15px !important
       overflow hidden
-      max-height 150px
+      max-height 148px
       margin-bottom 8px
       text-overflow ellipsis
       white-space nowrap
@@ -115,4 +115,6 @@ export default {
       .icon2
         font-size 14px
         margin-right 5px
+  .el-link--default:hover
+    color #aaa !important
 </style>

@@ -105,6 +105,9 @@ export default {
         font-weight lighter
         margin-left 15px
         color #777
+        &:hover
+          color #000
+          cursor pointer
   .card
     margin-bottom 20px
 </style>

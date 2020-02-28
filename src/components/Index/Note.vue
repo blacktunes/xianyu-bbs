@@ -90,6 +90,8 @@ export default {
   font-size 18px
   text-align center
   margin 0
+.el-link--default:hover
+  color #aaa !important
 .note-time
   font-size 12px
   text-align center
