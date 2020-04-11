@@ -21,6 +21,15 @@ Vue.use(Highlight)
 
 Vue.config.productionTip = false
 
+router.beforeEach((to, from, next) => {
+  if (to.meta.title) {
+    document.title = to.meta.title
+  } else {
+    document.title = '非洲咸鱼'
+  }
+  next()
+})
+
 new Vue({
   router,
   store,

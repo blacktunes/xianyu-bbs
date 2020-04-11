@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import {
-  // Button,
+  Button,
   Menu,
   MenuItem,
   Submenu,
@@ -19,7 +19,7 @@ import {
   TimelineItem
 } from 'element-ui'
 
-// Vue.use(Button)
+Vue.use(Button)
 Vue.use(Menu)
 Vue.use(MenuItem)
 Vue.use(Submenu)

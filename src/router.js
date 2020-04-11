@@ -47,7 +47,10 @@ export default new Router({
     },
     {
       path: '*',
-      component: NotFound
+      component: NotFound,
+      meta: {
+        title: '404 Page Error'
+      }
     }
   ]
 })
