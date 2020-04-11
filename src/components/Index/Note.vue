@@ -70,7 +70,9 @@ export default {
       max-height 500px
       margin 5px
     & >>> .el-card__header
-        padding 5px
+      padding 5px
+    & >>> .el-card__body
+      pointer-events none
     .note-text
       font-size 14px
       line-height 20px

@@ -24,8 +24,6 @@ export default {
   },
   mounted () {
     this.container = document.getElementById('container')
-    window.onmousemove = (e) => {
-    }
   }
 }
 </script>
@@ -49,7 +47,6 @@ export default {
     display flex
     justify-content center
     align-items center
-    background #151729
     background url('../assets/img/404.png'), #151729
     background-size 100px 100px
     box-shadow 0 15px 30px rgba(0, 0, 0, .5)

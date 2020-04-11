@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <top-header></top-header>
+    <mouse></mouse>
     <div class="view">
       <router-view class="view-item"/>
     </div>
@@ -9,9 +10,12 @@
 
 <script>
 import TopHeader from '@/components/Header'
+import Mouse from '@/components/Mouse'
+
 export default {
   components: {
-    TopHeader
+    TopHeader,
+    Mouse
   },
   methods: {
     _scrollUpdate () {
