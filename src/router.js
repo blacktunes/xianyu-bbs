@@ -37,6 +37,10 @@ export default new Router({
       component: () => import('./views/Note')
     },
     {
+      path: '/test',
+      component: () => import('./views/Test')
+    },
+    {
       path: '/timeline',
       component: () => import('./views/Timeline')
     },

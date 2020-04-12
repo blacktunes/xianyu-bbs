@@ -7,16 +7,18 @@
 <script>
 export default {
   mounted () {
-    window.onmousemove = (e) => {
+    document.onmousemove = (e) => {
       /* eslint-disable no-new */
-      new Circle(e.clientX, e.clientY, 15)
+      for (let i = 0; i < 5; i++) {
+        new Circle(e.clientX, e.clientY, 15)
+      }
     }
 
     var canvas = document.getElementById('canvas')
     canvas.width = window.innerWidth
     canvas.height = window.innerHeight
 
-    window.addEventListener('resize', () => {
+    document.addEventListener('resize', () => {
       canvas.width = window.innerWidth
       canvas.height = window.innerHeight
     }, false)

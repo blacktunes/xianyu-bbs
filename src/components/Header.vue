@@ -19,6 +19,7 @@
         <el-menu-item index="/note/update">Update</el-menu-item>
       </el-submenu>
       <el-menu-item index="/mood">Mood</el-menu-item>
+      <el-menu-item index="/test" title="测试页面">Tset</el-menu-item>
       <el-menu-item index="/timeline">Timeline</el-menu-item>
   </el-menu>
   </div>
