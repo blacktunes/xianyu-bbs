@@ -23,7 +23,7 @@ export default {
   max-width 100vw
   height 300px
   padding 0
-  margin 0
+  margin 20px 0 50px 0
   display flex
   justify-content center
   align-items center

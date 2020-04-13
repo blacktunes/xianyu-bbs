@@ -18,6 +18,7 @@ export default {
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 .inedx-menu-wrapper
+  margin 20px 0 50px 0
   display flex
   justify-content center
   align-items center
