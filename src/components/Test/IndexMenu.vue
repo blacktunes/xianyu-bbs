@@ -29,6 +29,8 @@ export default {
     background transparent
   ul
     position relative
+    margin 0
+    padding 0
     &:hover li a
       color #0002
     li
@@ -62,7 +64,7 @@ export default {
           content ''
           position absolute
           top 50%
-          left 40%
+          left 100%
           transform translate(-50%, -50%)
           display flex
           justify-content center
