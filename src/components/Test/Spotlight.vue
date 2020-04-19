@@ -12,9 +12,11 @@
   align-items center
   background #222
   height 200px
+  user-select none
   h1
     color #333
     position relative
+    font-size 50px
     &:after
       content attr(data-spotlight)
       color transparent

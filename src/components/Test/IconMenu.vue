@@ -18,7 +18,7 @@ export default {
 }
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" scoped>
 .icon-menu-wrapper
   max-width 100vw
   height 300px

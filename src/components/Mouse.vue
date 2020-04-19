@@ -9,7 +9,7 @@ export default {
   mounted () {
     document.onmousemove = (e) => {
       /* eslint-disable no-new */
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < 2; i++) {
         new Circle(e.clientX, e.clientY, 15)
       }
     }
