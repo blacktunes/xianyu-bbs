@@ -20,6 +20,7 @@
       </el-submenu>
       <el-menu-item index="/mood">Mood</el-menu-item>
       <el-menu-item index="/test" title="测试页面">Tset</el-menu-item>
+      <el-menu-item index="/test2" title="测试页面2">Tset2</el-menu-item>
       <el-menu-item index="/timeline">Timeline</el-menu-item>
   </el-menu>
   </div>

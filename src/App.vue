@@ -16,16 +16,6 @@ export default {
   components: {
     TopHeader,
     Mouse
-  },
-  methods: {
-    _scrollUpdate () {
-      setTimeout(() => {
-        this.$refs.scrollbar.update()
-      }, 60)
-    }
-  },
-  updeted () {
-    this._scrollUpdate()
   }
 }
 </script>

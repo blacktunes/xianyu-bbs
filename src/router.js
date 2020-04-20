@@ -41,6 +41,10 @@ export default new Router({
       component: () => import('./views/Test')
     },
     {
+      path: '/test2',
+      component: () => import('./views/Test2')
+    },
+    {
       path: '/timeline',
       component: () => import('./views/Timeline')
     },
