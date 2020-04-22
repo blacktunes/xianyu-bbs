@@ -6,6 +6,7 @@
     <test-button/>
     <index-menu/>
     <icon-menu/>
+    <live2d/>
   </div>
 </template>
 
@@ -15,6 +16,7 @@ import IndexMenu from '../components/Test/IndexMenu'
 import IconMenu from '../components/Test/IconMenu'
 import Spotlight from '../components/Test/Spotlight'
 import GlowingText from '../components/Test/GlowingText'
+import live2d from '../components/L2D'
 
 export default {
   components: {
@@ -22,7 +24,8 @@ export default {
     IndexMenu,
     IconMenu,
     Spotlight,
-    GlowingText
+    GlowingText,
+    live2d
   }
 }
 </script>
