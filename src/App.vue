@@ -1,22 +1,18 @@
 <template>
   <div id="app">
-    <top-header></top-header>
-    <mouse></mouse>
-    <div class="view">
-      <router-view class="view-item"/>
-    </div>
+    <router-view class="view-item"/>
   </div>
 </template>
 
 <script>
-import TopHeader from '@/components/Header'
-import Mouse from '@/components/Mouse'
+// import TopHeader from '@/components/Header'
+// import Mouse from '@/components/Mouse'
 
 export default {
-  components: {
-    TopHeader,
-    Mouse
-  }
+  // components: {
+  //   TopHeader,
+  //   Mouse
+  // }
 }
 </script>
 
@@ -43,10 +39,4 @@ export default {
 body
   overflow-y scroll
   margin 0
-.view
-  margin-top 76px
-  .view-item
-    max-width 960px
-    min-width 768px
-    margin auto
 </style>

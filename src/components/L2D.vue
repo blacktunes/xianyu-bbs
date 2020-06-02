@@ -2,7 +2,7 @@
   <div id="live2d" :style="{ zIndex }">
     <transition name="fade">
       <div v-show="mainShow">
-        <canvas id="live2d-main" width="250" height="400"/>
+        <canvas id="live2d-main" width="250" height="365"/>
       </div>
     </transition>
   </div>
@@ -63,7 +63,7 @@ export default {
   #live2d {
     position: fixed;
     width: 250px;
-    height: 400px;
+    height: 365px;
     bottom: 0;
     right: 10px;
   }
