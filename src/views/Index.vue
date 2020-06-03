@@ -7,11 +7,8 @@
       </div>
       <div class="icon">↓</div>
     </div>
-    <div class="banner content" ref="content">
-      <div class="text">
-        <p class="tip">我还没想好该写什么</p>
-        <p class="tip">现在的话什么都还没有</p>
-      </div>
+    <div class="content" ref="content">
+      <index-menu class="menu"/>
       <div class="icon">↑</div>
     </div>
     <a class="icp" target="_Blank" href="http://beian.miit.gov.cn" ref="icp">粤ICP备18046932号</a>
@@ -19,18 +16,25 @@
 </template>
 
 <script>
+import IndexMenu from '../components/Test/IndexMenu'
+
 export default {
+  components: {
+    IndexMenu
+  },
   mounted () {
     document.styleSheets[document.styleSheets.length - 1].insertRule('body::-webkit-scrollbar { display: none }', 0)
     window.addEventListener('scroll', (e) => {
       let scrolled = document.documentElement.scrollTop / (document.documentElement.scrollHeight - document.documentElement.clientHeight)
       if (scrolled >= 0.1) {
         this.$refs.banner.style.opacity = 1 - scrolled
+        this.$refs.banner.style.zIndex = 1 - scrolled
         this.$refs.content.style.opacity = scrolled
         this.$refs.icp.style.background = `rgb(${255 - scrolled * 150},${255 - scrolled * 150},${255 - scrolled * 150})`
         this.$refs.icp.style.color = `rgb(${scrolled * 255},${scrolled * 255},${scrolled * 255})`
       } else {
         this.$refs.banner.style.opacity = 1
+        this.$refs.banner.style.zIndex = 1
         this.$refs.content.style.opacity = 0
       }
     })
@@ -42,8 +46,9 @@ export default {
 .background
   max-width 100vw !important
   height calc(100vh + 100px)
+  user-select none
   .banner
-    user-select none
+    z-index 1
     position fixed
     top 0
     width 100%
@@ -55,6 +60,7 @@ export default {
       left 50%
       transform translate(-50%, -50%)
       text-align center
+      white-space nowrap
       color #fff
     .title
       font-size 25px
@@ -80,23 +86,16 @@ export default {
           content '我都说了没什么用咯...'
           color #fff
           text-shadow 2px 2px 6px rgba(0, 0, 0, 0.5)
-    .icon
-      position absolute
-      bottom 25px
-      left calc(50% - 10px)
-      width 20px
-      color #fff
-      animation shake 2s ease-out infinite
   .content
-    z-index -1
+    position fixed
+    top 0
+    width 100%
+    height 100vh
     background #eee
-    .tip
-      color #000
-      animation none
-      text-shadow none
     .icon
       color #000
   .icp
+    z-index 10
     font-size 12px
     line-height 16px
     position fixed
@@ -105,6 +104,14 @@ export default {
     color #000
     text-align center
     background #fff
+
+.icon
+  position fixed
+  bottom 25px
+  left calc(50% - 10px)
+  width 20px
+  color #fff
+  animation shake 2s ease-out infinite
 
 @keyframes shake
   0%

@@ -1,11 +1,9 @@
 <template>
   <div class="inedx-menu-wrapper">
     <ul>
-      <li><a href="#" data-text="Home">Home</a></li>
-      <li><a href="#" data-text="VUE">VUE</a></li>
-      <li><a href="#" data-text="SERVER">SERVER</a></li>
-      <li><a href="#" data-text="OTHER">OTHER</a></li>
-      <li><a href="#" data-text="MOOD">MOOD</a></li>
+      <li><router-link data-text="Vue" to="/">VUE</router-link></li>
+      <li><router-link data-text="SERVER" to="/">SERVER</router-link></li>
+      <li><router-link data-text="Other" to="/">OTHER</router-link></li>
     </ul>
   </div>
 </template>
@@ -18,15 +16,13 @@ export default {
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 .inedx-menu-wrapper
-  margin 20px 0 50px 0
   display flex
   justify-content center
   align-items center
   overflow hidden
   transition all 0.5s ease
-  background #777
-  &:hover
-    background transparent
+  height 100%
+  user-select none
   ul
     position relative
     margin 0
@@ -36,7 +32,7 @@ export default {
     li
       text-align center
       list-style none
-      margin 5px
+      margin 0
       &:hover a
         color #000
         background #fff
@@ -57,7 +53,7 @@ export default {
         color #333
         text-decoration none
         font-size 60px
-        padding 5px 20px
+        padding 10px 20px
         font-weight 700
         transition 0.5s
         &:before
@@ -76,12 +72,12 @@ export default {
           font-weight 900
           text-transform uppercase
           letter-spacing 500px
-          transition letter-spacing 0.5s, left 0.5s
+          transition letter-spacing 0.5s, left 0.5s, opacity 0.5s
         &:hover:before
           content attr(data-text)
           opacity 1
           left 50%
           letter-spacing 10px
-          width 100vw
+          width 130vw
           height 100vh
 </style>
