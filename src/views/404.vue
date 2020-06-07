@@ -25,7 +25,11 @@ export default {
     }
   },
   mounted () {
-    this.container = document.getElementById('container')
+    if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+      this.mouseMove = null
+    } else {
+      this.container = document.getElementById('container')
+    }
   }
 }
 </script>
@@ -33,20 +37,17 @@ export default {
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 .not-found
   user-select none
-  margin-top -15px
-  max-width 100vw !important
   box-sizing border-box
-  background linear-gradient(45deg, #666, #fff, #666)
   font-family: "Helvetica Neue"
   .not-found-wrapper
     position relative
-    height calc(100vh - 61px)
+    height 100vh
     #container
       position absolute
-      top 10%
-      right 10%
-      bottom 10%
-      left 10%
+      top 2%
+      right 2%
+      bottom 2%
+      left 2%
       border-radius 10px
       display flex
       justify-content center

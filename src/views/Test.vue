@@ -12,7 +12,7 @@
 
 <script>
 import TestButton from '../components/Test/Button'
-import IndexMenu from '../components/Test/IndexMenu'
+import IndexMenu from '../components/Index/IndexMenu'
 import IconMenu from '../components/Test/IconMenu'
 import Spotlight from '../components/Test/Spotlight'
 import GlowingText from '../components/Test/GlowingText'
