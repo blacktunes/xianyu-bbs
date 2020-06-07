@@ -1,16 +1,35 @@
 <template>
   <div class="inedx-menu-wrapper">
     <ul>
-      <li><router-link data-text="Vue" to="/">VUE</router-link></li>
-      <li><router-link data-text="SERVER" to="/">SERVER</router-link></li>
-      <li><router-link data-text="Other" to="/">OTHER</router-link></li>
+      <template v-for="(item, index) in list">
+        <li :key="index">
+          <router-link :data-text="item.name" :to="item.path">{{item.name}}</router-link>
+        </li>
+      </template>
     </ul>
   </div>
 </template>
 
 <script>
 export default {
-
+  data () {
+    return {
+      list: [
+        {
+          name: '笔记',
+          path: '/note'
+        },
+        {
+          name: '吐槽',
+          path: '/'
+        },
+        {
+          name: '其它',
+          path: '/'
+        }
+      ]
+    }
+  }
 }
 </script>
 
@@ -47,7 +66,7 @@ export default {
       &:nth-child(5n+5) a:before
         background #fd79a8
       a
-        width 270px
+        width 200px
         display inline-flex
         justify-content center
         color #333

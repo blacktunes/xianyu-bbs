@@ -3,21 +3,18 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './plugins/element.js'
-// import VueSocketIO from 'vue-socket.io'
-// import moment from 'moment'
-import Highlight from '@/assets/js/highlight'
 
-// import { serverUrl2 } from '@/api/store'
+import VMdPreview from '@kangc/v-md-editor/lib/preview'
+// import VueMarkdownEditor from '@kangc/v-md-editor'
+import '@kangc/v-md-editor/lib/style/base-editor.css'
+import vuepressTheme from '@kangc/v-md-editor/lib/theme/vuepress.js'
+import createLineNumbertPlugin from '@kangc/v-md-editor/lib/plugins/line-number/index'
+import createTodoListPlugin from '@kangc/v-md-editor/lib/plugins/todo-list/index'
 
-// Vue.use(new VueSocketIO({
-//   debug: false,
-//   connection: serverUrl2
-// }))
-
-// Vue.prototype.$moment = moment
-// moment.locale('zh-cn')
-
-Vue.use(Highlight)
+VMdPreview.use(vuepressTheme)
+VMdPreview.use(createLineNumbertPlugin())
+VMdPreview.use(createTodoListPlugin())
+Vue.use(VMdPreview)
 
 Vue.config.productionTip = false
 
@@ -28,6 +25,11 @@ router.beforeEach((to, from, next) => {
     document.title = '非洲咸鱼'
   }
   next()
+})
+
+router.afterEach(() => {
+  document.body.scrollTop = 0
+  document.documentElement.scrollTop = 0
 })
 
 new Vue({

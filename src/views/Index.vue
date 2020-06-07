@@ -1,30 +1,31 @@
 <template>
-  <div class="background">
-    <div class="banner" ref="banner">
-      <div class="text">
-        <p class="title">feizhouxianyu.cn</p>
-        <p class="tip">一个并没什么用的网站</p>
+  <transition name="fade" appear>
+    <div class="background">
+      <div class="banner" ref="banner">
+        <div class="text">
+          <p class="title">feizhouxianyu.cn</p>
+          <p class="tip">一个并没什么用的网站</p>
+        </div>
+        <div class="icon">↓</div>
       </div>
-      <div class="icon">↓</div>
+      <div class="content" ref="content">
+        <index-menu class="menu"/>
+        <div class="icon">↑</div>
+      </div>
+      <a class="icp" target="_Blank" href="http://beian.miit.gov.cn" ref="icp">粤ICP备18046932号</a>
     </div>
-    <div class="content" ref="content">
-      <index-menu class="menu"/>
-      <div class="icon">↑</div>
-    </div>
-    <a class="icp" target="_Blank" href="http://beian.miit.gov.cn" ref="icp">粤ICP备18046932号</a>
-  </div>
+  </transition>
 </template>
 
 <script>
-import IndexMenu from '../components/Test/IndexMenu'
+import IndexMenu from '../components/Index/IndexMenu'
 
 export default {
   components: {
     IndexMenu
   },
-  mounted () {
-    document.styleSheets[document.styleSheets.length - 1].insertRule('body::-webkit-scrollbar { display: none }', 0)
-    window.addEventListener('scroll', (e) => {
+  methods: {
+    scroll (e) {
       let scrolled = document.documentElement.scrollTop / (document.documentElement.scrollHeight - document.documentElement.clientHeight)
       if (scrolled >= 0.1) {
         this.$refs.banner.style.opacity = 1 - scrolled
@@ -37,7 +38,13 @@ export default {
         this.$refs.banner.style.zIndex = 1
         this.$refs.content.style.opacity = 0
       }
-    })
+    }
+  },
+  created () {
+    window.addEventListener('scroll', this.scroll)
+  },
+  destroyed () {
+    window.removeEventListener('scroll', this.scroll)
   }
 }
 </script>
@@ -136,4 +143,9 @@ export default {
     transform translate(0, 0)
   100%
     transform translate(0, 0)
+
+.fade-enter-active, .fade-leave-active
+  transition opacity 0.5s
+.fade-enter, .fade-leave-to
+  opacity 0
 </style>
