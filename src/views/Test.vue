@@ -4,28 +4,25 @@
     <glowing-text/>
     <spotlight/>
     <test-button/>
-    <index-menu/>
     <icon-menu/>
-    <live2d/>
+    <!-- <live2d/> -->
   </div>
 </template>
 
 <script>
 import TestButton from '../components/Test/Button'
-import IndexMenu from '../components/Index/IndexMenu'
 import IconMenu from '../components/Test/IconMenu'
 import Spotlight from '../components/Test/Spotlight'
 import GlowingText from '../components/Test/GlowingText'
-import live2d from '../components/L2D'
+// import live2d from '../components/L2D'
 
 export default {
   components: {
     TestButton,
-    IndexMenu,
     IconMenu,
     Spotlight,
-    GlowingText,
-    live2d
+    GlowingText
+    // live2d
   }
 }
 </script>

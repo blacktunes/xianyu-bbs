@@ -1,31 +1,37 @@
 <template>
-  <div class="note-wrapper">
-      <v-md-preview :text="text" height="400px"  ref="md" />
+  <div>
+    <note-list :data="data" />
   </div>
 </template>
 
-<script>
-import axios from 'axios'
+<script type="text/ecmascript-6">
+import { getShowNoteList } from '@/api/store'
+import NoteList from '../components/Note/NoteList'
+
 export default {
+  components: {
+    NoteList
+  },
   data () {
     return {
-      text: ''
+      data: []
     }
   },
-  mounted () {
-    axios.get('/test/test.md')
-      .then(res => {
-        this.text = res.data
+  methods: {
+    _getShowNoteList () {
+      getShowNoteList().then((res) => {
+        if (res.status === 200) {
+          this.data = res.data.showNoteList
+        }
       })
+    }
+  },
+  created () {
+    this._getShowNoteList()
   }
 }
 </script>
 
-<style lang="stylus" scoped>
-.note-wrapper
-  padding 10px 15px
-  & >>> .line-numbers-mode
-    max-width 800px
-    code
-      white-space pre-wrap
+<style lang="stylus" rel="stylesheet/stylus" scoped>
+
 </style>

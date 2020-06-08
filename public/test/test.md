@@ -9,14 +9,13 @@
 
 其它的什么时候想到再慢慢加。
 
-## 主页部分
+## 入口页
 现在打算加一个入口页面，因为实在不知道怎么做比较好，就选用简洁风吧。
 简洁到什么程度你，就是一个纯色banner加上两行字，最多再加上一个箭头。
 ![主页-第一屏](https://www.feizhouxianyu.cn/img/01.jpg "主页-第一屏")
 但是这样有点太单调了，所以加点动态效果吧。所以给小箭头加个动画吧，别人的小箭头都会一跳一跳的，我也加上这个吧。
 实现方法比较简单，用`keyframes`动画就好了。
-```css
-/* 因为使用了stylus所以省略了大括号和分号 */
+```stylus
 @keyframes shake
   0%
     transform translate(0, 0)
@@ -26,11 +25,11 @@
     transform translate(0, 0)
 ```
 然后绑定到箭头的`class`上，`shake`是`keyframes`动画名，`2s`是动画要用2秒完成，`ease-out`是以慢速结束的过渡效果，`infinite`是循环播放。
-```css
+```stylus
 animation: shake 2s ease-out infinite
 ```
 好像还是有点单调，那就让副标题也一起都起来吧，不过抖的频率要稍微再快点，而且抖两次。
-```css
+```stylus
 @keyframes shake2
   0%
     transform translate(0, 0)
@@ -48,7 +47,7 @@ animation: shake 2s ease-out infinite
     transform translate(0, 0)
 ```
 再加个选中时改变文字的效果吧。
-```css
+```stylus
 &:hover
   transition all 0.3s linear
   color transparent
@@ -214,5 +213,140 @@ export default {
     transform translate(0, 0)
   100%
     transform translate(0, 0)
+</style>
+```
+## 导航菜单
+鼠标放到选项上会动态的改变背景，效果由纯`CSS`实现。
+菜单内容目前是写死的，但是可以将`data`改为`props`从父组件引入。
+``` javascript
+export default {
+  props: {
+    list: {
+      type: Array,
+      default: [{ name: 'name', path: '/router' }]
+    }
+  }
+}
+```
+![导航菜单](https://www.feizhouxianyu.cn/img/03.jpg "导航菜单")
+![导航菜单-鼠标悬浮效果](https://www.feizhouxianyu.cn/img/04.jpg "导航菜单-鼠标悬浮效果")
+菜单使用`flex`布局，水平垂直居中，改变背景由一个布满伪元素实现。
+选项的伪元素`:before`默认的`content`为空，`opacity`透明度为0，`font-weight`文字间隔`500px`,并且添加`transition`属性添加过度效果。
+``` stylus
+transition letter-spacing 0.5s, opacity 0.5s
+```
+当鼠标移动到选项上时使用`:hover`选择器选择`:before`。
+使用`attr(data-text)`获取元素的`data-text`属性，同时把宽高设置到一个较大的值。
+``` stylus
+a:hover:before
+  content attr(data-text)
+  opacity 1
+  letter-spacing 10px
+  width 130vw
+  height 100vh
+```
+### 完整代码
+``` javascript
+<template>
+  <div class="inedx-menu-wrapper">
+    <ul>
+      <template v-for="(item, index) in list">
+        <li :key="index">
+          <router-link :data-text="item.name" :to="item.path">{{item.name}}</router-link>
+        </li>
+      </template>
+    </ul>
+  </div>
+</template>
+
+<script>
+export default {
+  data () {
+    return {
+      list: [
+        {
+          name: '笔记',
+          path: '/note'
+        },
+        {
+          name: '吐槽',
+          path: '/'
+        },
+        {
+          name: '其它',
+          path: '/'
+        }
+      ]
+    }
+  }
+}
+</script>
+
+<style lang="stylus" rel="stylesheet/stylus" scoped>
+.inedx-menu-wrapper
+  display flex
+  justify-content center
+  align-items center
+  overflow hidden
+  transition all 0.5s ease
+  height 100%
+  user-select none
+  ul
+    position relative
+    margin 0
+    padding 0
+    &:hover li a
+      color #0002
+    li
+      text-align center
+      list-style none
+      margin 0
+      &:hover a
+        color #000
+        background #fff
+      &:nth-child(5n+1) a:before
+        background #81ecec
+      &:nth-child(5n+2) a:before
+        background #ff7675
+      &:nth-child(5n+3) a:before
+        background #55efc4
+      &:nth-child(5n+4) a:before
+        background #a29bfe
+      &:nth-child(5n+5) a:before
+        background #fd79a8
+      a
+        width 200px
+        display inline-flex
+        justify-content center
+        color #333
+        text-decoration none
+        font-size 60px
+        padding 10px 20px
+        font-weight 700
+        transition 0.5s
+        &:before
+          content ''
+          position absolute
+          top 50%
+          left 100%
+          transform translate(-50%, -50%)
+          display flex
+          justify-content center
+          align-items center
+          font-size 180px
+          color rgba(0, 0, 0, 0.1)
+          z-index -1
+          opacity 0
+          font-weight 900
+          text-transform uppercase
+          letter-spacing 500px
+          transition letter-spacing 0.5s, left 0.5s, opacity 0.5s
+        &:hover:before
+          content attr(data-text)
+          opacity 1
+          left 50%
+          letter-spacing 10px
+          width 130vw
+          height 100vh
 </style>
 ```
