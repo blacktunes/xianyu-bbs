@@ -16,6 +16,14 @@ export default new Router({
       component: () => import('./views/Note2')
     },
     {
+      path: '/note/test',
+      component: () => import('./views/Note')
+    },
+    {
+      path: '/test',
+      component: () => import('./views/Test')
+    },
+    {
       path: '*',
       component: () => import('./views/404'),
       meta: {

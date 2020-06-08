@@ -21,11 +21,11 @@ export default {
         },
         {
           name: '吐槽',
-          path: '/'
+          path: '/tucao'
         },
         {
           name: '其它',
-          path: '/'
+          path: '/other'
         }
       ]
     }
