@@ -4,7 +4,7 @@
       <div v-for="(col, index) in list" :key="index" class="col" ref="col">
         <transition-group name="fade">
         <div class="note" v-for="item in col" :key="item.id">
-          <card>
+          <card class="card">
             <div slot="header">
               <router-link class="note-title" to="/note/test">{{item.title}}</router-link>
               <p class="note-time">{{item.time.split(' ')[0]}}</p>
@@ -28,6 +28,10 @@ export default {
     data: {
       type: Array,
       default: () => []
+    },
+    width: {
+      type: Number,
+      default: 300
     }
   },
   data () {
@@ -44,7 +48,7 @@ export default {
       return value
     },
     waterfallInit () {
-      this.line = Math.floor(document.documentElement.clientWidth / 300) || 1
+      this.line = Math.floor(document.documentElement.clientWidth / this.width) || 1
       this.list = []
       for (let i = 0; i < this.line; i++) {
         this.list.push([])
@@ -67,6 +71,9 @@ export default {
   watch: {
     data () {
       this.waterfallInit()
+    },
+    width () {
+      this.waterfallInit()
     }
   },
   created () {
@@ -80,57 +87,54 @@ export default {
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-
 .show-note
-  min-height 500px
   display flex
   flex-wrap wrap
   .col
     overflow hidden
     .note
       overflow hidden
-      max-height 500px
-      margin 5px 3px
-    & >>> .el-card__header
-      padding 5px
-    & >>> .el-card__body
-      pointer-events none
-    .note-text
-      font-size 14px
-      line-height 20px
-      & >>> code
-        overflow hidden
-        color #000
-        font-weight lighter
-        font-size 12px
-        border-radius 3px
-        padding 3px 5px
-        width 100%
-        font-family: sans-serif
-        background #eee
-
-.note-title
-  display block
-  font-size 18px
-  text-align center
-  margin 0
-  color #666
-  text-decoration none
-  &:hover
-    color #aaa
-.el-link--default:hover
-  color #aaa !important
-.note-time
-  font-size 12px
-  text-align center
-  margin 5px 0 0 0
-  color #777
+      margin 0
+      .card
+        min-height 350px
+        max-height 450px
+        .note-title
+          display block
+          font-size 18px
+          text-align center
+          margin 0
+          color #666
+          text-decoration none
+          &:hover
+            color #aaa
+        .note-time
+          font-size 12px
+          text-align center
+          margin 5px 0 0 0
+          color #777
+        .note-text
+          font-size 14px
+          line-height 20px
+          & >>> code
+            overflow hidden
+            color #000
+            font-weight lighter
+            font-size 12px
+            border-radius 3px
+            padding 3px 5px
+            width 100%
+            font-family: sans-serif
+            background #eee
 
 .fade-enter-active
-  transition opacity 0.2s
-  transition-delay 0.2s
+  transition all 0.2s
+  transition-delay 0.25s
 .fade-leave-active
-  transition opacity 0.2s
+  transition all 0.2s
 .fade-enter, .fade-leave-to
   opacity 0
+  transform translate(-100%, 0)
+.fade-enter-to, .fade-leave
+  opacity 1
+  transform translate(0, 0)
 </style>

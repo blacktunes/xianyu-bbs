@@ -33,6 +33,9 @@ export default {
   },
   watch: {
     $route (to, from) {
+      if (to.path === from.path) {
+        return
+      }
       if (to.path === '/' || to.meta.type) {
         this.removeCss()
       } else {
