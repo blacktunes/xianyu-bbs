@@ -2,19 +2,23 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import './plugins/element.js'
+import './assets/style/transition.styl'
 
 import VMdPreview from '@kangc/v-md-editor/lib/preview'
-// import VueMarkdownEditor from '@kangc/v-md-editor'
-import '@kangc/v-md-editor/lib/style/base-editor.css'
+
 import vuepressTheme from '@kangc/v-md-editor/lib/theme/vuepress.js'
 import createLineNumbertPlugin from '@kangc/v-md-editor/lib/plugins/line-number/index'
 import createTodoListPlugin from '@kangc/v-md-editor/lib/plugins/todo-list/index'
-import 'prismjs/components/prism-stylus'
+import createEmojiPlugin from '@kangc/v-md-editor/lib/plugins/emoji/index'
+import 'prismjs/components/prism-stylus.min'
+import 'prismjs/components/prism-nginx.min'
+import 'prismjs/components/prism-powershell.min'
+import 'prismjs/components/prism-typescript.min'
 
 VMdPreview.use(vuepressTheme)
 VMdPreview.use(createLineNumbertPlugin())
 VMdPreview.use(createTodoListPlugin())
+VMdPreview.use(createEmojiPlugin())
 Vue.use(VMdPreview)
 
 Vue.config.productionTip = false

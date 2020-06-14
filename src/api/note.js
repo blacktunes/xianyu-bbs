@@ -14,3 +14,7 @@ export function getTopic () {
 export function getNoteList (topic) {
   return axios.get(`${serverUrl}/getNoteList?topic=${topic}`)
 }
+
+export function getNote (id) {
+  return axios.get(`${serverUrl}/getNote?id=${id}`)
+}

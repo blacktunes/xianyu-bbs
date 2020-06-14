@@ -12,11 +12,11 @@ export default new Router({
       component: () => import('./views/Index')
     },
     {
-      path: '/note',
-      component: () => import('./views/Note2')
+      path: '/topic',
+      component: () => import('./views/Topic')
     },
     {
-      path: '/note/test',
+      path: '/note',
       component: () => import('./views/Note')
     },
     {

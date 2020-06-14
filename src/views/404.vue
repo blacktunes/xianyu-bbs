@@ -6,7 +6,7 @@
           <h2>404</h2>
           <h4>Page Not Found</h4>
           <router-link to="/">
-            <el-button type="danger" round>Back To Home</el-button>
+            <button>Back To Home</button>
           </router-link>
         </div>
       </div>

@@ -1,120 +1,104 @@
 <template>
-<div class="topic">
-  <div class="loading" v-show="!showNote" v-loading="!showNote"></div>
-  <div class="not-found" v-if="noteEmpty && !notFound && showNote">该分类暂无内容</div>
-  <div class="not-found" v-if="notFound">404</div>
-  <div v-for="item in noteList" :key="item.id">
-    <el-card shadow="hover" :body-style="{ padding: '15px' }" class="note">
-      <div>
-        <el-link :underline="false" class="title" @click="noteClick(item.topic, item.id)">{{item.title}}</el-link>
-        <div class="text" v-html="ellipsis(item.text)"></div>
-        <div class="subheading">
-          <i class="icon1 el-icon-date"></i>
-          <div class="time">{{item.time}}</div>
-          <i class="icon2 el-icon-view"></i>
-          <div class="read">{{item.read}}</div>
+  <div class="notelist-wrapper">
+    <transition name="slider-top" appear>
+      <div class="topic-menu">
+        <div class="button" @click="changeTopic(false)">
+          <card class="card" :style="{'background': topicName ? '' : '#ccc', 'cursor': topicName ? '' : 'default'}">all</card>
         </div>
+        <transition-group name="slider-top" appear>
+          <template v-for="(item, index) in topic">
+            <div class="button" :key="index" @click="changeTopic(item)">
+              <card class="card" :style="{'background': topicName !== item ? '' : '#ccc', 'cursor': topicName !== item ? '' : 'default'}">{{item}}</card>
+            </div>
+          </template>
+        </transition-group>
       </div>
-    </el-card>
+    </transition>
+    <note-list :data="data" />
   </div>
-</div>
 </template>
 
 <script type="text/ecmascript-6">
-import { getNoteList } from '@/api/store'
+import { getAllNote, getTopic, getNoteList } from '@/api/note'
+import NoteList from '../components/Note/NoteList'
+import Card from '../components/common/Card'
 
 export default {
-  name: 'topic',
+  components: {
+    NoteList,
+    Card
+  },
   data () {
     return {
-      topic: '',
-      noteList: [],
-      showNote: false,
-      notFound: false
+      data: [],
+      topic: []
     }
   },
   computed: {
-    noteEmpty () {
-      return this.noteList.length === 0
+    topicName () {
+      return this.$route.query.topic
     }
   },
   methods: {
-    noteClick (topic, id) {
-      this.$router.push(`/note/${topic}/${id}`)
-    },
-    ellipsis (value) {
-      let temp = value.replace(/<img[^>]*>/g, '[图片]').replace(/<pre>.*?<\/pre>/isg, '[代码块]')
-      // if (temp.length > 200) {
-      //   return temp.slice(0, 200) + '...'
-      // }
-      return temp
-    },
-    _getNoteList (topic) {
-      this.showNote = false
-      getNoteList(topic).then((res) => {
-        if (res.data.ERR_CODE === 0) {
-          this.showNote = true
-          this.noteList = res.data.noteList.reverse()
+    changeTopic (topic) {
+      if (this.topicName !== topic) {
+        if (!topic) {
+          if (this.topicName) {
+            this.$router.replace({ path: this.$router.path, query: {} })
+            this._getAllNote()
+          }
         } else {
-          this.showNote = true
-          this.notFound = true
+          this.$router.replace({ path: this.$router.path, query: { topic } })
+          this._getNoteList(this.topicName)
+        }
+      }
+    },
+    _getAllNote () {
+      getAllNote().then((res) => {
+        if (res.status === 200) {
+          this.data = res.data
         }
       })
+    },
+    _getNoteList (topic) {
+      getNoteList(topic)
+        .then(res => {
+          if (res.status === 200) {
+            this.data = res.data
+          }
+        })
     }
   },
   created () {
-    this.topic = this.$route.params.topic
-    this._getNoteList(this.topic)
-  },
-  watch: {
-    $route (to) {
-      this.noteList = []
-      this.notFound = false
-      if (to.params.topic) {
-        this.topic = to.params.topic
-        this._getNoteList(this.topic)
-      }
+    getTopic()
+      .then(res => {
+        if (res.status === 200) {
+          this.topic = res.data
+        }
+      })
+    if (this.topicName) {
+      this._getNoteList(this.topicName)
+    } else {
+      this._getAllNote()
     }
   }
 }
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-.topic
-  .loading
-    height calc(100vh - 61px - 61px - 30px)
-  .not-found
-    max-width 960px
-    margin 15px auto 0 auto
-  .note
-    margin 5px auto
-    .title
-      font-weight bold
-      font-size 25px
-    .text
-      font-size 15px !important
-      overflow hidden
-      max-height 148px
-      margin-bottom 8px
-      text-overflow ellipsis
-      white-space nowrap
-    .subheading
-      display flex
-      align-items center
-      .time
-        font-size 14px
-        font-weight lighter
-        margin-right 15px
-        color #777
-      .read
-        font-size 14px
-        font-weight lighter
-      .icon1
-        font-size 12px
-        margin-right 5px
-      .icon2
-        font-size 14px
-        margin-right 5px
-  .el-link--default:hover
-    color #aaa !important
+.notelist-wrapper
+  max-width 90vw
+  margin 0 auto 15px auto
+  .topic-menu
+    margin-top 15px
+    .button
+      display inline-block
+      user-select none
+      .card
+        cursor pointer
+        &:hover
+          background #eee
+          box-shadow none
+        &:active
+          background #ddd
 </style>
