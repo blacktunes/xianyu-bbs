@@ -6,7 +6,9 @@
           <h2>404</h2>
           <h4>Page Not Found</h4>
           <router-link to="/">
-            <button>Back To Home</button>
+            <div class="button">
+              <card class="card">Back To Home</card>
+            </div>
           </router-link>
         </div>
       </div>
@@ -15,7 +17,12 @@
 </template>
 
 <script type="text/ecmascript-6">
+import Card from '../components/common/Card'
+
 export default {
+  components: {
+    Card
+  },
   methods: {
     mouseMove (e) {
       let x = e.clientX
@@ -71,4 +78,19 @@ export default {
           font-weight 300
           padding 10px 20px
           margin 0 0 35px 0
+        .button
+          display inline-block
+          user-select none
+          .card
+            cursor pointer
+            padding 6px 10px
+            background #f56c6c
+            border none
+            border-radius 40px
+            color #fff
+            &:hover
+              background #f78989
+              box-shadow none
+            &:active
+              background #dd6161
 </style>

@@ -2,6 +2,9 @@
   <div class="notelist-wrapper">
     <transition name="slider-top" appear>
       <div class="topic-menu">
+        <div class="button" @click="back">
+          <card class="card">←</card>
+        </div>
         <div class="button" @click="changeTopic(false)">
           <card class="card" :style="{'background': topicName ? '' : '#ccc', 'cursor': topicName ? '' : 'default'}">all</card>
         </div>
@@ -24,6 +27,7 @@ import NoteList from '../components/Note/NoteList'
 import Card from '../components/common/Card'
 
 export default {
+  name: 'topic',
   components: {
     NoteList,
     Card
@@ -40,6 +44,9 @@ export default {
     }
   },
   methods: {
+    back () {
+      this.$router.push('/')
+    },
     changeTopic (topic) {
       if (this.topicName !== topic) {
         if (!topic) {
@@ -56,7 +63,10 @@ export default {
     _getAllNote () {
       getAllNote().then((res) => {
         if (res.status === 200) {
-          this.data = res.data
+          this.data = []
+          this.$nextTick(() => {
+            this.data = res.data
+          })
         }
       })
     },
@@ -64,7 +74,10 @@ export default {
       getNoteList(topic)
         .then(res => {
           if (res.status === 200) {
-            this.data = res.data
+            this.data = []
+            this.$nextTick(() => {
+              this.data = res.data
+            })
           }
         })
     }

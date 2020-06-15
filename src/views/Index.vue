@@ -52,7 +52,7 @@ export default {
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 .background
   max-width 100vw !important
-  height calc(100vh + 100px)
+  height calc(100vh + 10px)
   user-select none
   .banner
     z-index 1
@@ -70,7 +70,7 @@ export default {
       white-space nowrap
       color #fff
     .title
-      font-size 25px
+      font-size 27px
       text-shadow 2px 2px 6px rgba(0, 0, 0, 0.5)
     .tip
       font-size 20px

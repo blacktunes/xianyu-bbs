@@ -12,7 +12,7 @@ export default new Router({
       component: () => import('./views/Index')
     },
     {
-      path: '/topic',
+      path: '/notelist',
       component: () => import('./views/Topic')
     },
     {

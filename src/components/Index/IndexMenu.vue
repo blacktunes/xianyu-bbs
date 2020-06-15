@@ -17,7 +17,7 @@ export default {
       list: [
         {
           name: '笔记',
-          path: '/topic'
+          path: '/notelist'
         },
         {
           name: '吐槽',

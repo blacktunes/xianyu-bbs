@@ -1,9 +1,11 @@
 <template>
-  <div class="note">
-    <div class="title">{{title}}</div>
-    <div class="time">{{time}}</div>
-    <v-md-preview class="text" :text="text"></v-md-preview>
-  </div>
+  <transition name="fade">
+    <div class="note" v-show="textReady">
+      <div class="title">{{title}}</div>
+      <div class="time">{{time}}</div>
+      <v-md-preview class="text" :text="text"></v-md-preview>
+    </div>
+  </transition>
 </template>
 
 <script type="text/ecmascript-6">
@@ -14,7 +16,8 @@ export default {
     return {
       title: '',
       time: '',
-      text: ''
+      text: '',
+      textReady: false
     }
   },
   created () {
@@ -24,9 +27,10 @@ export default {
           this.title = res.data.title
           this.time = res.data.time
           this.text = res.data.text
+          this.textReady = true
         })
     } else {
-      this.$router.push('/topic')
+      this.$router.push('/notelist')
     }
   }
 }
@@ -34,7 +38,7 @@ export default {
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 .note
-  width 80vw
+  width 85vw
   margin auto
   .title
     font-size 2rem
@@ -45,5 +49,16 @@ export default {
   .text
     & >>> .line-numbers-mode
       min-width 600px
+      max-width 100%
       display inline-block
+
+@media (max-width: 600px)
+  .note
+    width 100vw
+    .text
+      padding 10px
+      & >>> .line-numbers-mode
+        min-width 0 !important
+        width 100%
+        display inline-block
 </style>
