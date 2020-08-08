@@ -4,10 +4,8 @@ import router from './router'
 import store from './store'
 import './assets/style/transition.styl'
 
-import VMdEditor from '@kangc/v-md-editor/lib/codemirror-editor'
 import VMdPreview from '@kangc/v-md-editor/lib/preview'
 
-import '@kangc/v-md-editor/lib/style/codemirror-editor.css'
 import vuepressTheme from '@kangc/v-md-editor/lib/theme/vuepress.js'
 import createLineNumbertPlugin from '@kangc/v-md-editor/lib/plugins/line-number/index'
 import createTodoListPlugin from '@kangc/v-md-editor/lib/plugins/todo-list/index'
@@ -22,12 +20,6 @@ VMdPreview.use(createLineNumbertPlugin())
 VMdPreview.use(createTodoListPlugin())
 VMdPreview.use(createEmojiPlugin())
 Vue.use(VMdPreview)
-
-VMdEditor.use(vuepressTheme)
-VMdEditor.use(createLineNumbertPlugin())
-VMdEditor.use(createTodoListPlugin())
-VMdEditor.use(createEmojiPlugin())
-Vue.use(VMdEditor)
 
 Vue.config.productionTip = false
 
