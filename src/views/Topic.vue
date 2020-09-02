@@ -17,19 +17,29 @@
         </transition-group>
       </div>
     </transition>
-    <note-list :data="data" />
+    <waterfall :data="data">
+      <template v-slot:item="props">
+        <card class="note-card">
+          <div slot="header">
+            <router-link class="note-title" :to="`/note?id=${props.item.id}`">{{props.item.title}}</router-link>
+            <p class="note-time">{{props.item.time}}</p>
+          </div>
+          <v-md-preview class="note-text" :text="props.item.text"></v-md-preview>
+        </card>
+      </template>
+    </waterfall>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
 import { getAllNote, getTopic, getNoteList } from '@/api/note'
-import NoteList from '../components/Note/NoteList'
 import Card from '../components/common/Card'
+import Waterfall from '../components/common/Waterfall'
 
 export default {
   name: 'topic',
   components: {
-    NoteList,
+    Waterfall,
     Card
   },
   data () {
@@ -114,4 +124,39 @@ export default {
           box-shadow none
         &:active
           background #ddd
+  .note-card
+    & >>> .card-text
+      position relative
+      overflow hidden
+      min-height 280px
+      max-height 380px
+      &:after
+        content ""
+        position absolute
+        bottom 0
+        left 0
+        width 100%
+        height 10%
+        background-image linear-gradient(to bottom, transparent, #fff)
+    .note-title
+      display block
+      font-size 18px
+      text-align center
+      margin 0
+      color #666
+      text-decoration none
+      &:hover
+        color #aaa
+    .note-time
+      font-size 12px
+      text-align center
+      margin 5px 0 0 0
+      color #777
+    .note-text
+      box-sizing border-box
+      pointer-events none
+      font-size 14px
+      padding 0
+      & >>> code
+        word-break normal
 </style>

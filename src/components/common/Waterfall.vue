@@ -1,17 +1,11 @@
 <template>
   <transition name="slider-left" appear>
-    <div class="note-list">
+    <div class="waterfall">
       <div v-for="(col, index) in list" :key="index" class="col" ref="col">
         <transition-group name="slider-left">
-        <div class="note" v-for="item in col" :key="item.id">
-          <card class="card">
-            <div slot="header">
-              <router-link class="note-title" :to="`/note?id=${item.id}`">{{item.title}}</router-link>
-              <p class="note-time">{{item.time}}</p>
-            </div>
-            <v-md-preview class="note-text" :text="item.text"></v-md-preview>
-          </card>
-        </div>
+          <div class="item" v-for="(item, key) in col" :key="'item' + key">
+            <slot :item="item" name="item"></slot>
+          </div>
         </transition-group>
       </div>
     </div>
@@ -19,11 +13,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import Card from '../common/Card'
 export default {
-  components: {
-    Card
-  },
   props: {
     data: {
       type: Array,
@@ -81,47 +71,12 @@ export default {
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-.note-list
+.waterfall
   display flex
   flex-wrap wrap
   .col
     overflow hidden
-    .note
+    .item
       overflow hidden
       margin 0
-      .card
-        & >>> .card-text
-          position relative
-          overflow hidden
-          min-height 280px
-          max-height 380px
-          &:after
-            content ""
-            position absolute
-            bottom 0
-            left 0
-            width 100%
-            height 10%
-            background-image linear-gradient(to bottom, transparent, #fff)
-        .note-title
-          display block
-          font-size 18px
-          text-align center
-          margin 0
-          color #666
-          text-decoration none
-          &:hover
-            color #aaa
-        .note-time
-          font-size 12px
-          text-align center
-          margin 5px 0 0 0
-          color #777
-        .note-text
-          box-sizing border-box
-          pointer-events none
-          font-size 14px
-          padding 0
-          & >>> code
-            word-break normal
 </style>
