@@ -31,4 +31,5 @@ export default {
     padding 5px
   .card-text
     padding 5px 10px
+    word-break break-all
 </style>

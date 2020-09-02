@@ -20,6 +20,10 @@ export default new Router({
       component: () => import('./views/Note')
     },
     {
+      path: '/other',
+      component: () => import('./views/Other')
+    },
+    {
       path: '/test',
       component: () => import('./views/Test')
     },
