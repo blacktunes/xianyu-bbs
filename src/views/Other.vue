@@ -29,18 +29,22 @@ export default {
     return {
       data: [
         {
+          id: 1,
           title: '这个主页',
           text: '[github](https://github.com/blacktunes/Xianyu-bbs)'
         },
         {
+          id: 2,
           title: '🌶️神乐七奈的语音按钮',
           text: `[项目地址](https://kaguranana.moe/)\n[github](https://github.com/blacktunes/kaguranana-button)`
         },
         {
+          id: 3,
           title: '咸鱼Bot',
           text: `基于coolq-http-api的QQ机器人\n[github](https://github.com/blacktunes/xianyu-robot)`
         },
         {
+          id: 4,
           title: '仿微博WebApp',
           text: `已经鸽了很久了\n[github](https://github.com/blacktunes/mood)`
         }

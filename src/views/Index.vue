@@ -6,11 +6,11 @@
           <p class="title">feizhouxianyu.cn</p>
           <p class="tip">一个并没什么用的网站</p>
         </div>
-        <div class="icon">↓</div>
+        <div class="icon" @click="toBottom">↓</div>
       </div>
       <div class="content" ref="content">
         <index-menu class="menu"/>
-        <div class="icon">↑</div>
+        <div class="icon" @click="toTop">↑</div>
       </div>
       <a class="icp" target="_Blank" href="http://beian.miit.gov.cn" ref="icp">粤ICP备18046932号</a>
     </div>
@@ -25,6 +25,12 @@ export default {
     IndexMenu
   },
   methods: {
+    toBottom () {
+      window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' })
+    },
+    toTop () {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    },
     scroll (e) {
       let scrolled = document.documentElement.scrollTop / (document.documentElement.scrollHeight - document.documentElement.clientHeight)
       if (scrolled >= 0.1) {
@@ -119,6 +125,7 @@ export default {
   width 20px
   color #fff
   animation shake 2s ease-out infinite
+  cursor pointer
 
 @keyframes shake
   0%

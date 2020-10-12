@@ -118,6 +118,7 @@ export default {
       display inline-block
       user-select none
       .card
+        height 32px
         cursor pointer
         &:hover
           background #eee

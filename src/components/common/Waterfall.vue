@@ -1,13 +1,15 @@
 <template>
-  <transition name="slider-left" appear>
+  <transition name="fade" appear>
     <div class="waterfall">
-      <div v-for="(col, index) in list" :key="index" class="col" ref="col">
-        <transition-group name="slider-left">
-          <div class="item" v-for="(item, key) in col" :key="'item' + key">
-            <slot :item="item" name="item"></slot>
-          </div>
-        </transition-group>
-      </div>
+      <transition-group name="fade">
+        <div v-for="(col, index) in list" :key="'col' + index" class="col" ref="col">
+          <transition-group name="slider">
+            <div class="item" v-for="item in col" :key="item.id">
+              <slot :item="item" name="item"></slot>
+            </div>
+          </transition-group>
+        </div>
+      </transition-group>
     </div>
   </transition>
 </template>
@@ -62,21 +64,25 @@ export default {
   },
   created () {
     this.waterfallInit()
-    window.addEventListener('resize', this.waterfallInit)
+    window.onresize = () => {
+      this.waterfallInit(false)
+    }
   },
   destroyed () {
-    window.removeEventListener('resize', this.waterfallInit)
+    window.onresize = null
   }
 }
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 .waterfall
-  display flex
-  flex-wrap wrap
-  .col
-    overflow hidden
-    .item
+  span
+    display flex
+    flex-wrap wrap
+    .col
       overflow hidden
-      margin 0
+      .item
+        width 100%
+        overflow hidden
+        margin 0
 </style>

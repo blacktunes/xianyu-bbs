@@ -2,7 +2,9 @@
   <transition name="fade">
     <div class="note" v-show="textReady">
       <div class="title">{{title}}</div>
-      <div class="time">{{time}}</div>
+      <div class="info">
+        <div class="time">{{time}}</div>
+      </div>
       <v-md-preview class="text" :text="text"></v-md-preview>
     </div>
   </transition>
@@ -17,6 +19,7 @@ export default {
       title: '',
       time: '',
       text: '',
+      read: 1,
       textReady: false
     }
   },
@@ -27,6 +30,7 @@ export default {
           this.title = res.data.title
           this.time = res.data.time
           this.text = res.data.text
+          this.read = res.data.read + 1
           this.textReady = true
         })
     } else {
@@ -43,9 +47,13 @@ export default {
   .title
     font-size 2rem
     font-weight 600
-    margin 20px
-  .time
-    margin 0 20px
+    margin 20px 0 20px 0
+  .info
+    display flex
+    align-items center
+    margin 20px 0 20px 0
+    .read
+      margin-left 20px
   .text
     & >>> .line-numbers-mode
       min-width 600px

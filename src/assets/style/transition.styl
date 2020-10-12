@@ -1,14 +1,14 @@
-.slider-left-enter-active
-  transition all 0.2s
-  transition-delay 0.25s
-.slider-left-leave-active
-  transition all 0.2s
-.slider-left-enter, .slider-left-leave-to
+.slider-enter-active
+  transition all 0.3s ease-out
+  transition-delay: 0.3s
+.slider-leave-active
+  transition all 0.3s ease-out
+.slider-enter, .slider-leave-to
+  max-height 0
   opacity 0
-  transform translate(-100%, 0)
-.slider-left-enter-to, .slider-left-leave
+.slider-enter-to, .slider-leave
+  max-height 380px
   opacity 1
-  transform translate(0, 0)
 
 .slider-top-enter-active, .slider-top-leave-active
   transition all 0.3s
