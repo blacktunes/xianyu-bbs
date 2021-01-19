@@ -1,9 +1,14 @@
 const CompressionPlugin = require('compression-webpack-plugin')
+const stylusRandom = require('./plugins/stylus-random')
 
 module.exports = {
-  // publicPath: process.env.NODE_ENV === 'production'
-  //   ? './'
-  //   : '/',
+  css: {
+    loaderOptions: {
+      stylus: {
+        use: [stylusRandom()]
+      }
+    }
+  },
   productionSourceMap: false, // 不产生map文件
   configureWebpack: config => {
     if (process.env.NODE_ENV === 'production') {
