@@ -25,8 +25,8 @@ export default {
   },
   methods: {
     mouseMove (e) {
-      let x = e.clientX
-      let y = e.clientY
+      const x = e.clientX
+      const y = e.clientY
       this.container.style.backgroundPositionX = x + 'px'
       this.container.style.backgroundPositionY = y + 'px'
     }

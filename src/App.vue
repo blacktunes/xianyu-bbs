@@ -17,14 +17,14 @@ export default {
   },
   methods: {
     addCss () {
-      let link = document.createElement('link')
+      const link = document.createElement('link')
       link.setAttribute('rel', 'stylesheet')
       link.setAttribute('type', 'text/css')
       link.setAttribute('href', '/css/scroll.css')
       document.getElementsByTagName('head')[0].appendChild(link)
     },
     removeCss () {
-      let links = document.getElementsByTagName('link')
+      const links = document.getElementsByTagName('link')
       for (let i = links.length; i >= 0; i--) {
         const link = links[i]
         if (link && link.getAttribute('href') && link.getAttribute('href') === '/css/scroll.css') {
@@ -35,7 +35,7 @@ export default {
   },
   watch: {
     $route (to, from) {
-      if (to.path === '/home' || to.path === '/' || to.meta.type) {
+      if (to.meta.hideScrollbar) {
         this.addCss()
       } else {
         this.removeCss()

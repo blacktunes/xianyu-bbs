@@ -32,7 +32,7 @@ export default {
       window.scrollTo({ top: 0, behavior: 'smooth' })
     },
     scroll (e) {
-      let scrolled = document.documentElement.scrollTop / (document.documentElement.scrollHeight - document.documentElement.clientHeight)
+      const scrolled = document.documentElement.scrollTop / (document.documentElement.scrollHeight - document.documentElement.clientHeight)
       if (scrolled >= 0.1) {
         this.$refs.banner.style.opacity = 1 - scrolled
         this.$refs.banner.style.zIndex = 1 - scrolled

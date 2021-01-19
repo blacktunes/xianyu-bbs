@@ -9,11 +9,18 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: () => import('./views/Entry')
+      component: () => import('./views/Entry'),
+      meta: {
+        title: 'Error?',
+        hideScrollbar: true
+      }
     },
     {
       path: '/home',
-      component: () => import('./views/Index')
+      component: () => import('./views/Index'),
+      meta: {
+        hideScrollbar: true
+      }
     },
     {
       path: '/topic',
@@ -36,7 +43,7 @@ export default new Router({
       component: () => import('./views/404'),
       meta: {
         title: '404 Page Error',
-        type: 404
+        hideScrollbar: true
       }
     }
   ]
