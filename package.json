@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@kangc/v-md-editor": "^1.4.10",
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "gsap": "^3.6.0",
     "stylus": "^0.54.8",
     "stylus-loader": "^3.0.2",
