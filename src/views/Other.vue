@@ -40,11 +40,16 @@ export default {
         },
         {
           id: 3,
+          title: '🍣Hiiro的语音按钮',
+          text: `[项目地址](https://hiiro.club/)\n[github](https://github.com/blacktunes/hiiro-button)`
+        },
+        {
+          id: 4,
           title: '咸鱼Bot',
           text: `基于coolq-http-api的QQ机器人\n[github](https://github.com/blacktunes/xianyu-robot)`
         },
         {
-          id: 4,
+          id: 5,
           title: '仿微博WebApp',
           text: `已经鸽了很久了\n[github](https://github.com/blacktunes/mood)`
         }
@@ -53,7 +58,7 @@ export default {
   },
   methods: {
     back () {
-      this.$router.push('/')
+      this.$router.push('/home')
     }
   }
 }

@@ -55,7 +55,7 @@ export default {
   },
   methods: {
     back () {
-      this.$router.push('/')
+      this.$router.push('/home')
     },
     changeTopic (topic) {
       if (this.topicName !== topic) {

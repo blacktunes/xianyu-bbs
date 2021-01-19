@@ -9,10 +9,14 @@ export default new Router({
   routes: [
     {
       path: '/',
+      component: () => import('./views/Entry')
+    },
+    {
+      path: '/home',
       component: () => import('./views/Index')
     },
     {
-      path: '/notelist',
+      path: '/topic',
       component: () => import('./views/Topic')
     },
     {

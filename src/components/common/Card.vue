@@ -15,7 +15,7 @@ export default {
 }
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus" scoped>
+<style lang="stylus" scoped>
 .card-wrapper
   margin 5px
   border-radius 4px

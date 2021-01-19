@@ -35,12 +35,12 @@ export default {
   },
   watch: {
     $route (to, from) {
-      if (to.path === '/' || to.meta.type) {
+      if (to.path === '/home' || to.path === '/' || to.meta.type) {
         this.addCss()
       } else {
         this.removeCss()
       }
-      if (from.path === '/note' && to.path === '/notelist') {
+      if (from.path === '/note' && to.path === '/topic') {
         this.keepAlive = true
       } else {
         this.keepAlive = false

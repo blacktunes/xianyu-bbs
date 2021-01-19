@@ -16,8 +16,12 @@ export default {
     return {
       list: [
         {
+          name: '? ? ?',
+          path: '/'
+        },
+        {
           name: '笔记',
-          path: '/notelist'
+          path: '/topic'
         },
         {
           name: '吐槽',
@@ -74,7 +78,7 @@ export default {
         font-size 60px
         padding 10px 20px
         font-weight 700
-        transition 0.5s
+        transition all 0.5s
         &:before
           content ''
           position absolute
@@ -97,6 +101,6 @@ export default {
           opacity 1
           left 50%
           letter-spacing 10px
-          width 130vw
+          width 300vw
           height 100vh
 </style>

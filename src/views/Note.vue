@@ -34,7 +34,7 @@ export default {
           this.textReady = true
         })
     } else {
-      this.$router.push('/notelist')
+      this.$router.push('/topic')
     }
   }
 }

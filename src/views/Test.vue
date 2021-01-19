@@ -1,6 +1,5 @@
 <template>
   <div class="test">
-    <el-alert class="message" type="info" center :closable="false" title="该页面为将来可能会用上的组件的测试和预览"></el-alert>
     <glowing-text/>
     <spotlight/>
     <test-button/>

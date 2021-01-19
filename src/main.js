@@ -5,17 +5,18 @@ import store from './store'
 import './assets/style/transition.styl'
 
 import VMdPreview from '@kangc/v-md-editor/lib/preview'
+import '@kangc/v-md-editor/lib/style/preview.css'
+import vuepressTheme from '@kangc/v-md-editor/lib/theme/vuepress'
+import '@kangc/v-md-editor/lib/theme/style/vuepress.css'
+import createLineNumbertPlugin from '@kangc/v-md-editor/lib/plugins/line-number'
+import createTodoListPlugin from '@kangc/v-md-editor/lib/plugins/todo-list'
+import createEmojiPlugin from '@kangc/v-md-editor/lib/plugins/emoji'
 
-import vuepressTheme from '@kangc/v-md-editor/lib/theme/vuepress.js'
-import createLineNumbertPlugin from '@kangc/v-md-editor/lib/plugins/line-number/index'
-import createTodoListPlugin from '@kangc/v-md-editor/lib/plugins/todo-list/index'
-import createEmojiPlugin from '@kangc/v-md-editor/lib/plugins/emoji/index'
-import 'prismjs/components/prism-stylus.min'
-import 'prismjs/components/prism-nginx.min'
-import 'prismjs/components/prism-powershell.min'
-import 'prismjs/components/prism-typescript.min'
-
-VMdPreview.use(vuepressTheme)
+VMdPreview.use(vuepressTheme, {
+  codeHighlightExtensionMap: {
+    vue: 'html'
+  }
+})
 VMdPreview.use(createLineNumbertPlugin())
 VMdPreview.use(createTodoListPlugin())
 VMdPreview.use(createEmojiPlugin())
