@@ -11,6 +11,7 @@
   "dependencies": {
     "@kangc/v-md-editor": "^1.4.10",
     "axios": "^0.20.0",
+    "gsap": "^3.6.0",
     "stylus": "^0.54.8",
     "stylus-loader": "^3.0.2",
     "vue": "^2.6.12",
@@ -39,7 +40,9 @@
       "plugin:vue/essential",
       "@vue/standard"
     ],
-    "rules": {},
+    "rules": {
+      "space-before-function-paren": "off"
+    },
     "parserOptions": {
       "parser": "babel-eslint"
     }
