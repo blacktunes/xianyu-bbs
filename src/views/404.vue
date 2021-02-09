@@ -5,7 +5,7 @@
         <div class="content">
           <h2>404</h2>
           <h4>Page Not Found</h4>
-          <router-link to="/home">
+          <router-link to="/index">
             <div class="button">
               <card class="card">Back To Home</card>
             </div>

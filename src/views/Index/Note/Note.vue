@@ -11,7 +11,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import { getNote } from '../api/note'
+import { getNote } from '@/api/note'
 
 export default {
   data () {

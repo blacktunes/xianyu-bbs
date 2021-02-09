@@ -9,34 +9,30 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: () => import('./views/Entry'),
+      component: () => import('./views/Error'),
       meta: {
         title: '',
         hideScrollbar: true
       }
     },
     {
-      path: '/home',
-      component: () => import('./views/Index'),
+      path: '/index',
+      component: () => import('./views/Index/Index'),
       meta: {
         hideScrollbar: true
       }
     },
     {
       path: '/topic',
-      component: () => import('./views/Topic')
+      component: () => import('./views/Index/Note/Topic')
     },
     {
       path: '/note',
-      component: () => import('./views/Note')
+      component: () => import('./views/Index/Note/Note')
     },
     {
       path: '/other',
-      component: () => import('./views/Other')
-    },
-    {
-      path: '/test',
-      component: () => import('./views/Test')
+      component: () => import('./views/Index/Other/Other')
     },
     {
       path: '*',

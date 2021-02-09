@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import IndexMenu from '../components/Index/IndexMenu'
+import IndexMenu from '@/components/Index/IndexMenu'
 
 export default {
   components: {

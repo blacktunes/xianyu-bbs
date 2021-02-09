@@ -52,8 +52,8 @@
 
 <script type="text/ecmascript-6">
 import { getAllNote, getTopic, getNoteList } from '@/api/note'
-import Card from '../components/common/Card'
-import Waterfall from '../components/common/Waterfall'
+import Card from '@/components/common/Card'
+import Waterfall from '@/components/common/Waterfall'
 
 export default {
   name: 'topic',
@@ -74,7 +74,7 @@ export default {
   },
   methods: {
     back() {
-      this.$router.push('/home')
+      this.$router.push('/index')
     },
     changeTopic(topic) {
       if (this.topicName !== topic) {

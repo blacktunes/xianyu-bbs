@@ -17,8 +17,8 @@
 </template>
 
 <script>
-import Waterfall from '../components/common/Waterfall'
-import Card from '../components/common/Card'
+import Waterfall from '@/components/common/Waterfall'
+import Card from '@/components/common/Card'
 
 export default {
   components: {
@@ -58,7 +58,7 @@ export default {
   },
   methods: {
     back () {
-      this.$router.push('/home')
+      this.$router.push('/index')
     }
   }
 }

@@ -139,14 +139,14 @@ export default {
   methods: {
     goHome() {
       if (this.isOK || this.isRouter) {
-        this.$router.push('/home')
+        this.$router.push('/index')
       } else {
         clearInterval(this.timer)
         this.number = 200
         this.tip = 'OK'
         this.isOK = true
         this.timer = setTimeout(() => {
-          this.$router.push('/home')
+          this.$router.push('/index')
         }, 1400)
       }
     },
