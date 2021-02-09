@@ -20,9 +20,11 @@ export default {
   created() {
     this.$router.options.routes.forEach(item => {
       if (item.menu) {
-        this.list.push({
-          path: item.path,
-          name: item.menu
+        item.children.forEach(children => {
+          this.list.push({
+            path: children.path,
+            name: children.menu
+          })
         })
       }
     })

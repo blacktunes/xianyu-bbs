@@ -1,20 +1,14 @@
 <template>
-  <div class="other">
-    <div class="header">
-      <Card class="back" @click.native="back">←</Card>
-      <Card>这个页面用来放点奇怪的东西</Card>
-    </div>
-    <waterfall :data="data" style="margin: 5px 5px">
-      <template v-slot:item="props">
-        <Card class="card">
-          <div slot="header">
-            {{ props.item.title }}
-          </div>
-          <v-md-preview class="text" :text="props.item.text"></v-md-preview>
-        </Card>
-      </template>
-    </waterfall>
-  </div>
+  <waterfall :data="data" style="margin: 5px 5px">
+    <template v-slot:item="props">
+      <Card class="card">
+        <div slot="header">
+          {{ props.item.title }}
+        </div>
+        <v-md-preview class="text" :text="props.item.text"></v-md-preview>
+      </Card>
+    </template>
+  </waterfall>
 </template>
 
 <script>
@@ -47,12 +41,12 @@ export default {
         {
           id: 4,
           title: '咸鱼Bot',
-          text: '基于coolq-http-api的QQ机器人\n[github](https://github.com/blacktunes/xianyu-robot)'
+          text: '可使用HTTP API的QQ机器人框架\n[github](https://github.com/blacktunes/xianyu-robot)'
         },
         {
           id: 5,
           title: '仿微博WebApp',
-          text: '已经鸽了很久了\n[github](https://github.com/blacktunes/mood)'
+          text: '已经鸽了很久了，择日重做\n[github](https://github.com/blacktunes/mood)'
         }
       ]
     }
@@ -71,37 +65,18 @@ a
   color #888
   text-decoration none
 
-.other
-  width 85vw
-  margin 10px auto
+.card
+  display block
+  font-size 18px
+  text-align center
+  margin 5px
+  color #666
 
-  .header
-    display flex
-    align-items center
-    user-select none
+  .text
+    box-sizing border-box
+    font-size 16px
+    padding 0
 
-    .back
-      cursor pointer
-
-      &:hover
-        background #eee
-        box-shadow none
-
-      &:active
-        background #ddd
-
-  .card
-    display block
-    font-size 18px
-    text-align center
-    margin 5px
-    color #666
-
-    .text
-      box-sizing border-box
-      font-size 16px
-      padding 0
-
-      & >>> code
-        word-break normal
+    & >>> code
+      word-break normal
 </style>

@@ -1,15 +1,7 @@
 <template>
-  <div class="notelist-wrapper">
-    <transition-group name="slide-top" appear>
-      <div class="topic-menu" key="menu1">
-        <div class="button" @click="back">
-          <card class="card">←</card>
-        </div>
-        <div class="button">
-          <Card>这个页面用来放点没用的笔记</Card>
-        </div>
-      </div>
-      <div class="topic-menu" style="margin: 0" key="menu2">
+  <div>
+    <transition name="slide-top" appear>
+      <div>
         <div class="button" @click="changeTopic(false)">
           <card
             class="card"
@@ -35,7 +27,7 @@
           </template>
         </transition-group>
       </div>
-    </transition-group>
+    </transition>
     <waterfall :data="data">
       <template v-slot:item="props">
         <router-link class="link" :to="`/note?id=${props.item.id}`">
@@ -133,66 +125,59 @@ export default {
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-.notelist-wrapper
-  max-width 90vw
-  margin 0 auto 15px auto
+.button
+  display inline-block
+  user-select none
 
-  .topic-menu
-    margin-top 15px
+  .card
+    height 32px
+    cursor pointer
 
-    .button
-      display inline-block
-      user-select none
+    &:hover
+      background #eee
+      box-shadow none
 
-      .card
-        height 32px
-        cursor pointer
+    &:active
+      background #ddd
 
-        &:hover
-          background #eee
-          box-shadow none
+.note-card
+  & >>> .card-text
+    position relative
+    overflow hidden
+    min-height 280px
+    max-height 380px
 
-        &:active
-          background #ddd
+    &:after
+      content ''
+      position absolute
+      bottom 0
+      left 0
+      width 100%
+      height 10%
+      background-image linear-gradient(to bottom, transparent, #fff)
 
-  .note-card
-    & >>> .card-text
-      position relative
-      overflow hidden
-      min-height 280px
-      max-height 380px
+  .note-title
+    display block
+    font-size 18px
+    text-align center
+    margin 0
+    color #666
+    text-decoration none
 
-      &:after
-        content ''
-        position absolute
-        bottom 0
-        left 0
-        width 100%
-        height 10%
-        background-image linear-gradient(to bottom, transparent, #fff)
+  .note-time
+    font-size 12px
+    text-align center
+    margin 5px 0 0 0
+    color #777
 
-    .note-title
-      display block
-      font-size 18px
-      text-align center
-      margin 0
-      color #666
-      text-decoration none
+  .note-text
+    box-sizing border-box
+    pointer-events none
+    font-size 14px
+    padding 0
 
-    .note-time
-      font-size 12px
-      text-align center
-      margin 5px 0 0 0
-      color #777
-
-    .note-text
-      box-sizing border-box
-      pointer-events none
-      font-size 14px
-      padding 0
-
-      & >>> code
-        word-break normal
+    & >>> code
+      word-break normal
 
 .link
   text-decoration none
