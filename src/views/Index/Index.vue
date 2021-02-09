@@ -9,10 +9,12 @@
         <div class="icon" @click="toBottom">↓</div>
       </div>
       <div class="content" ref="content">
-        <index-menu class="menu"/>
+        <index-menu class="menu" />
         <div class="icon" @click="toTop">↑</div>
       </div>
-      <a class="icp" target="_Blank" href="http://beian.miit.gov.cn" ref="icp">粤ICP备18046932号</a>
+      <a class="icp" target="_Blank" href="http://beian.miit.gov.cn" ref="icp"
+        >粤ICP备18046932号</a
+      >
     </div>
   </transition>
 </template>
@@ -25,13 +27,13 @@ export default {
     IndexMenu
   },
   methods: {
-    toBottom () {
+    toBottom() {
       window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' })
     },
-    toTop () {
+    toTop() {
       window.scrollTo({ top: 0, behavior: 'smooth' })
     },
-    scroll (e) {
+    scroll(e) {
       const scrolled = document.documentElement.scrollTop / (document.documentElement.scrollHeight - document.documentElement.clientHeight)
       if (scrolled >= 0.1) {
         this.$refs.banner.style.opacity = 1 - scrolled
@@ -46,10 +48,10 @@ export default {
       }
     }
   },
-  created () {
+  created() {
     window.addEventListener('scroll', this.scroll)
   },
-  destroyed () {
+  destroyed() {
     window.removeEventListener('scroll', this.scroll)
   }
 }
@@ -60,6 +62,7 @@ export default {
   max-width 100vw !important
   height calc(100vh + 10px)
   user-select none
+
   .banner
     z-index 1
     position fixed
@@ -67,6 +70,7 @@ export default {
     width 100%
     height 100vh
     background #666
+
     .text
       position absolute
       top 50%
@@ -75,20 +79,24 @@ export default {
       text-align center
       white-space nowrap
       color #fff
+
     .title
       font-size 27px
       text-shadow 2px 2px 6px rgba(0, 0, 0, 0.5)
+
     .tip
       font-size 20px
       transition all 0.3s ease-in
       position relative
       animation shake2 3s linear infinite
       text-shadow 2px 2px 6px rgba(0, 0, 0, 0.5)
+
       &:hover
         transition all 0.3s linear
         color transparent
         animation none
         text-shadow none
+
         &:after
           font-size 17px
           position absolute
@@ -99,14 +107,17 @@ export default {
           content '我都说了没什么用咯...'
           color #fff
           text-shadow 2px 2px 6px rgba(0, 0, 0, 0.5)
+
   .content
     position fixed
     top 0
     width 100%
     height 100vh
     background #eee
+
     .icon
       color #000
+
   .icp
     z-index 10
     font-size 12px
@@ -130,29 +141,38 @@ export default {
 @keyframes shake
   0%
     transform translate(0, 0)
+
   50%
     transform translate(0, 25%)
+
   100%
     transform translate(0, 0)
 
 @keyframes shake2
   0%
     transform translate(0, 0)
+
   20%
     transform translate(0, 0)
+
   25%
     transform translate(0, -15%)
+
   30%
     transform translate(0, 0)
+
   35%
     transform translate(0, -15%)
+
   40%
     transform translate(0, 0)
+
   100%
     transform translate(0, 0)
 
 .fade-enter-active, .fade-leave-active
   transition opacity 0.5s
+
 .fade-enter, .fade-leave-to
   opacity 0
 </style>

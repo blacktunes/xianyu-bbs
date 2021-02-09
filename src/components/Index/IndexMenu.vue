@@ -26,7 +26,6 @@ export default {
         })
       }
     })
-    console.log(this.$router.options.routes)
   }
 }
 </script>
@@ -100,7 +99,7 @@ export default {
           font-weight 900
           text-transform uppercase
           letter-spacing 500px
-          transition letter-spacing 0.5s, left 0.5s, opacity 0.5s
+          transition letter-spacing 0.5s, left 0.5s, opacity 1s
 
         &:hover:before
           content attr(data-text)

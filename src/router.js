@@ -30,8 +30,15 @@ export default new Router({
     },
     {
       path: '/note',
-      component: () => import('./views/Index/Note/Note'),
-      menu: '吐槽'
+      component: () => import('./views/Index/Note/Note')
+    },
+    {
+      path: '/chat',
+      component: () => import('./views/Index/Chat/Chat'),
+      menu: '闲聊',
+      meta: {
+        hideScrollbar: true
+      }
     },
     {
       path: '/other',

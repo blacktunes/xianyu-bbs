@@ -2,8 +2,13 @@
   <transition name="fade" appear>
     <div class="waterfall">
       <transition-group name="fade">
-        <div v-for="(col, index) in list" :key="'col' + index" class="col" ref="col">
-          <transition-group name="slider">
+        <div
+          v-for="(col, index) in list"
+          :key="'col' + index"
+          class="col"
+          ref="col"
+        >
+          <transition-group name="slide">
             <div class="item" v-for="item in col" :key="item.id">
               <slot :item="item" name="item"></slot>
             </div>
@@ -26,14 +31,14 @@ export default {
       default: 300
     }
   },
-  data () {
+  data() {
     return {
       list: [],
       line: 0
     }
   },
   methods: {
-    waterfallInit () {
+    waterfallInit() {
       this.line = Math.floor(document.documentElement.clientWidth / this.width) || 1
       this.list = []
       for (let i = 0; i < this.line; i++) {
@@ -55,20 +60,20 @@ export default {
     }
   },
   watch: {
-    data () {
+    data() {
       this.waterfallInit()
     },
-    width () {
+    width() {
       this.waterfallInit()
     }
   },
-  created () {
+  created() {
     this.waterfallInit()
     window.onresize = () => {
       this.waterfallInit(false)
     }
   },
-  destroyed () {
+  destroyed() {
     window.onresize = null
   }
 }
@@ -79,8 +84,10 @@ export default {
   span
     display flex
     flex-wrap wrap
+
     .col
       overflow hidden
+
       .item
         width 100%
         overflow hidden

@@ -1,10 +1,15 @@
 <template>
   <div class="notelist-wrapper">
-    <transition name="slider-top" appear>
-      <div class="topic-menu">
+    <transition-group name="slide-top" appear>
+      <div class="topic-menu" key="menu1">
         <div class="button" @click="back">
           <card class="card">←</card>
         </div>
+        <div class="button">
+          <Card>这个页面用来放点没用的笔记</Card>
+        </div>
+      </div>
+      <div class="topic-menu" style="margin: 0" key="menu2">
         <div class="button" @click="changeTopic(false)">
           <card
             class="card"
@@ -15,7 +20,7 @@
             >all</card
           >
         </div>
-        <transition-group name="slider-top" appear>
+        <transition-group name="slide-top" appear>
           <template v-for="(item, index) in topic">
             <div class="button" :key="index" @click="changeTopic(item)">
               <card
@@ -30,7 +35,7 @@
           </template>
         </transition-group>
       </div>
-    </transition>
+    </transition-group>
     <waterfall :data="data">
       <template v-slot:item="props">
         <router-link class="link" :to="`/note?id=${props.item.id}`">

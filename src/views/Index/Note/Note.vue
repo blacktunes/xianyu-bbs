@@ -1,9 +1,9 @@
 <template>
   <transition name="fade">
     <div class="note" v-show="textReady">
-      <div class="title">{{title}}</div>
+      <div class="title">{{ title }}</div>
       <div class="info">
-        <div class="time">{{time}}</div>
+        <div class="time">{{ time }}</div>
       </div>
       <v-md-preview class="text" :text="text"></v-md-preview>
     </div>
@@ -14,7 +14,7 @@
 import { getNote } from '@/api/note'
 
 export default {
-  data () {
+  data() {
     return {
       title: '',
       time: '',
@@ -23,7 +23,7 @@ export default {
       textReady: false
     }
   },
-  created () {
+  created() {
     if (this.$route.query.id) {
       getNote(this.$route.query.id)
         .then(res => {
@@ -44,27 +44,33 @@ export default {
 .note
   width 85vw
   margin auto
+
   .title
     font-size 2rem
     font-weight 600
     margin 20px 0 20px 0
+
   .info
     display flex
     align-items center
     margin 20px 0 20px 0
+
     .read
       margin-left 20px
+
   .text
     & >>> .line-numbers-mode
       min-width 600px
       max-width 100%
       display inline-block
 
-@media (max-width: 600px)
+@media (max-width 600px)
   .note
     width 100vw
+
     .text
       padding 10px
+
       & >>> .line-numbers-mode
         min-width 0 !important
         width 100%

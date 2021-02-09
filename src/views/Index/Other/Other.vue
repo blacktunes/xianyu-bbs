@@ -1,16 +1,17 @@
 <template>
   <div class="other">
-    <div class="header" @click="back">
-      <card class="back">←</card>
+    <div class="header">
+      <Card class="back" @click.native="back">←</Card>
+      <Card>这个页面用来放点奇怪的东西</Card>
     </div>
     <waterfall :data="data" style="margin: 5px 5px">
       <template v-slot:item="props">
-        <card class="card">
+        <Card class="card">
           <div slot="header">
-            {{props.item.title}}
+            {{ props.item.title }}
           </div>
           <v-md-preview class="text" :text="props.item.text"></v-md-preview>
-        </card>
+        </Card>
       </template>
     </waterfall>
   </div>
@@ -25,7 +26,7 @@ export default {
     Waterfall,
     Card
   },
-  data () {
+  data() {
     return {
       data: [
         {
@@ -57,7 +58,7 @@ export default {
     }
   },
   methods: {
-    back () {
+    back() {
       this.$router.push('/index')
     }
   }
@@ -73,27 +74,34 @@ a
 .other
   width 85vw
   margin 10px auto
+
   .header
     display flex
     align-items center
     user-select none
+
     .back
       cursor pointer
+
       &:hover
         background #eee
         box-shadow none
+
       &:active
         background #ddd
+
   .card
     display block
     font-size 18px
     text-align center
     margin 5px
     color #666
+
     .text
       box-sizing border-box
       font-size 16px
       padding 0
+
       & >>> code
         word-break normal
 </style>
