@@ -3,7 +3,9 @@
     <ul>
       <template v-for="(item, index) in list">
         <li :key="index">
-          <router-link :data-text="item.name" :to="item.path">{{item.name}}</router-link>
+          <router-link :data-text="item.name" :to="item.path">{{
+            item.name
+          }}</router-link>
         </li>
       </template>
     </ul>
@@ -12,27 +14,19 @@
 
 <script>
 export default {
-  data () {
-    return {
-      list: [
-        {
-          name: '? ? ?',
-          path: '/'
-        },
-        {
-          name: '笔记',
-          path: '/topic'
-        },
-        {
-          name: '吐槽',
-          path: '/tucao'
-        },
-        {
-          name: '其它',
-          path: '/other'
-        }
-      ]
-    }
+  data: () => ({
+    list: []
+  }),
+  created() {
+    this.$router.options.routes.forEach(item => {
+      if (item.menu) {
+        this.list.push({
+          path: item.path,
+          name: item.menu
+        })
+      }
+    })
+    console.log(this.$router.options.routes)
   }
 }
 </script>
@@ -46,29 +40,39 @@ export default {
   transition all 0.5s ease
   height 100%
   user-select none
+
   ul
     position relative
     margin 0
     padding 0
+
     &:hover li a
       color #0002
+
     li
       text-align center
       list-style none
       margin 0
+
       &:hover a
         color #000
         background #fff
+
       &:nth-child(5n+1) a:before
         background #81ecec
+
       &:nth-child(5n+2) a:before
         background #ff7675
+
       &:nth-child(5n+3) a:before
         background #55efc4
+
       &:nth-child(5n+4) a:before
         background #a29bfe
+
       &:nth-child(5n+5) a:before
         background #fd79a8
+
       a
         width 200px
         display inline-flex
@@ -79,6 +83,7 @@ export default {
         padding 10px 20px
         font-weight 700
         transition all 0.5s
+
         &:before
           content ''
           position absolute
@@ -96,6 +101,7 @@ export default {
           text-transform uppercase
           letter-spacing 500px
           transition letter-spacing 0.5s, left 0.5s, opacity 0.5s
+
         &:hover:before
           content attr(data-text)
           opacity 1

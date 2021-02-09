@@ -8,14 +8,6 @@ export default new Router({
   base: '/',
   routes: [
     {
-      path: '/',
-      component: () => import('./views/Error'),
-      meta: {
-        title: '',
-        hideScrollbar: true
-      }
-    },
-    {
       path: '/index',
       component: () => import('./views/Index/Index'),
       meta: {
@@ -23,23 +15,40 @@ export default new Router({
       }
     },
     {
+      path: '/',
+      component: () => import('./views/Error'),
+      menu: '? ? ?',
+      meta: {
+        title: '',
+        hideScrollbar: true
+      }
+    },
+    {
       path: '/topic',
-      component: () => import('./views/Index/Note/Topic')
+      component: () => import('./views/Index/Note/Topic'),
+      menu: '笔记'
     },
     {
       path: '/note',
-      component: () => import('./views/Index/Note/Note')
+      component: () => import('./views/Index/Note/Note'),
+      menu: '吐槽'
     },
     {
       path: '/other',
-      component: () => import('./views/Index/Other/Other')
+      component: () => import('./views/Index/Other/Other'),
+      menu: '其它'
+    },
+    {
+      path: '/component',
+      component: () => import('./views/Index/Component/Component'),
+      menu: '组件'
     },
     {
       path: '*',
-      component: () => import('./views/404'),
+      component: () => import('./views/Error'),
       meta: {
-        title: '404 Page Error',
-        hideScrollbar: true
+        hideScrollbar: true,
+        code: 404
       }
     }
   ]
