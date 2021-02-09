@@ -1,9 +1,6 @@
 <template>
   <div id="app">
-    <keep-alive include="topic">
-      <router-view v-if="keepAlive" />
-    </keep-alive>
-    <router-view v-if="!keepAlive" />
+    <router-view />
   </div>
 </template>
 
@@ -37,11 +34,6 @@ export default {
         this.addCss()
       } else {
         this.removeCss()
-      }
-      if (from.path === '/note' && to.path === '/topic') {
-        this.keepAlive = true
-      } else {
-        this.keepAlive = false
       }
     }
   }

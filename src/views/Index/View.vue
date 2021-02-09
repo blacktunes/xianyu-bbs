@@ -13,7 +13,7 @@
         <router-view />
       </div>
       <div class="footer">
-        <a href="https://github.com/blacktunes">blacktunes</a>
+        <a href="https://github.com/blacktunes" target="_blank">blacktunes</a>
       </div>
     </div>
     <template v-else>
@@ -33,9 +33,6 @@ export default {
     back() {
       this.$router.push('/index')
     }
-  },
-  mounted() {
-    console.log(this.$route)
   }
 }
 </script>
