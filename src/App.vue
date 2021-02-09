@@ -10,20 +10,18 @@
 <script>
 
 export default {
-  data () {
-    return {
-      keepAlive: true
-    }
-  },
+  data: () => ({
+    keepAlive: true
+  }),
   methods: {
-    addCss () {
+    addCss() {
       const link = document.createElement('link')
       link.setAttribute('rel', 'stylesheet')
       link.setAttribute('type', 'text/css')
       link.setAttribute('href', '/css/scroll.css')
       document.getElementsByTagName('head')[0].appendChild(link)
     },
-    removeCss () {
+    removeCss() {
       const links = document.getElementsByTagName('link')
       for (let i = links.length; i >= 0; i--) {
         const link = links[i]
@@ -34,7 +32,7 @@ export default {
     }
   },
   watch: {
-    $route (to, from) {
+    $route(to, from) {
       if (to.meta.hideScrollbar) {
         this.addCss()
       } else {
@@ -65,8 +63,8 @@ export default {
 
 /* 定义滑块 内阴影+圆角 */
 ::-webkit-scrollbar-thumb
-  box-shadow inset 0 0 6px rgba(0, 0, 0, .1)
-  -webkit-box-shadow inset 0 0 6px rgba(0, 0, 0, .1)
+  box-shadow inset 0 0 6px rgba(0, 0, 0, 0.1)
+  -webkit-box-shadow inset 0 0 6px rgba(0, 0, 0, 0.1)
   background-color #bbb
 
 ::-webkit-scrollbar-thumb:active
