@@ -35,115 +35,116 @@
 import gsap from 'gsap'
 
 export default {
-  data() {
-    return {
-      number: null,
-      tweenedNumber: 200,
-      tip: '',
-      codeList: [
-        {
-          code: 200,
-          tip: 'OK'
-        },
-        {
-          code: 400,
-          tip: 'Bad Request'
-        },
-        {
-          code: 401,
-          tip: 'Unauthorized'
-        },
-        {
-          code: 403,
-          tip: 'Forbidden'
-        },
-        {
-          code: 404,
-          tip: 'Not Found'
-        },
-        {
-          code: 405,
-          tip: 'Method Not Allowed'
-        },
-        {
-          code: 406,
-          tip: 'Not Acceptable'
-        },
-        {
-          code: 408,
-          tip: 'Request Time-out'
-        },
-        {
-          code: 401,
-          tip: 'Conflict'
-        },
-        {
-          code: 410,
-          tip: 'Gone'
-        },
-        {
-          code: 411,
-          tip: 'Length Required'
-        },
-        {
-          code: 412,
-          tip: 'Precondition Failed'
-        },
-        {
-          code: 413,
-          tip: 'Request Entity Too Large'
-        },
-        {
-          code: 414,
-          tip: 'Request-URI Too Large'
-        },
-        {
-          code: 415,
-          tip: 'Unsupported Media Type'
-        },
-        {
-          code: 416,
-          tip: 'Requested range not satisfiable'
-        },
-        {
-          code: 500,
-          tip: 'Internal Server Error'
-        },
-        {
-          code: 501,
-          tip: 'Not Implemented'
-        },
-        {
-          code: 502,
-          tip: 'Bad Gateway'
-        },
-        {
-          code: 503,
-          tip: 'Service Unavailable'
-        },
-        {
-          code: 504,
-          tip: 'Gateway Time-out'
-        },
-        {
-          code: 505,
-          tip: 'HTTP Version not supported'
-        }
-      ],
-      msgList: [],
-      isOK: false,
-      isRouter: false,
-      showTip: true
-    }
-  },
+  data: () => ({
+    custom: false,
+    number: null,
+    tweenedNumber: 200,
+    tip: '',
+    codeList: [
+      {
+        code: 200,
+        tip: 'OK'
+      },
+      {
+        code: 400,
+        tip: 'Bad Request'
+      },
+      {
+        code: 401,
+        tip: 'Unauthorized'
+      },
+      {
+        code: 403,
+        tip: 'Forbidden'
+      },
+      {
+        code: 404,
+        tip: 'Not Found'
+      },
+      {
+        code: 405,
+        tip: 'Method Not Allowed'
+      },
+      {
+        code: 406,
+        tip: 'Not Acceptable'
+      },
+      {
+        code: 408,
+        tip: 'Request Time-out'
+      },
+      {
+        code: 401,
+        tip: 'Conflict'
+      },
+      {
+        code: 410,
+        tip: 'Gone'
+      },
+      {
+        code: 411,
+        tip: 'Length Required'
+      },
+      {
+        code: 412,
+        tip: 'Precondition Failed'
+      },
+      {
+        code: 413,
+        tip: 'Request Entity Too Large'
+      },
+      {
+        code: 414,
+        tip: 'Request-URI Too Large'
+      },
+      {
+        code: 415,
+        tip: 'Unsupported Media Type'
+      },
+      {
+        code: 416,
+        tip: 'Requested range not satisfiable'
+      },
+      {
+        code: 500,
+        tip: 'Internal Server Error'
+      },
+      {
+        code: 501,
+        tip: 'Not Implemented'
+      },
+      {
+        code: 502,
+        tip: 'Bad Gateway'
+      },
+      {
+        code: 503,
+        tip: 'Service Unavailable'
+      },
+      {
+        code: 504,
+        tip: 'Gateway Time-out'
+      },
+      {
+        code: 505,
+        tip: 'HTTP Version not supported'
+      }
+    ],
+    msgList: [],
+    isOK: false,
+    isRouter: false,
+    showTip: true
+  }),
   methods: {
     goHome() {
       if (this.isOK || this.isRouter) {
         this.$router.push('/index')
       } else {
-        clearInterval(this.timer)
-        this.number = 200
-        this.tip = 'OK'
+        if (!this.custom) {
+          clearInterval(this.timer)
+          this.number = 200
+          this.tip = 'OK'
+        }
         this.isOK = true
         this.timer = setTimeout(() => {
           this.$router.push('/index')
@@ -183,26 +184,36 @@ export default {
   },
   watch: {
     number(newValue) {
-      if (newValue === 200) {
-        this.isRouter = true
-        document.title = '200 OK'
-      } else {
-        this.isRouter = false
-        document.title = `${newValue} ERROR?`
+      if (!this.custom) {
+        if (newValue === 200) {
+          this.isRouter = true
+          document.title = '200 OK'
+        } else {
+          this.isRouter = false
+          document.title = `${newValue} ERROR?`
+        }
       }
       gsap.to(this.$data, { duration: 0.5, tweenedNumber: newValue })
     }
   },
   mounted() {
-    this.getCode()
-    this.setTimer()
-    document.onvisibilitychange = () => {
-      if (document.visibilityState === 'hidden') {
-        clearInterval(this.timer)
-        document.title = '200 OK'
-      } else {
-        this.getCode()
-        this.setTimer()
+    this.custom = this.$route.meta.code && this.codeList.some(item => item.code === this.$route.meta.code)
+    if (this.custom) {
+      const temp = this.codeList.find(item => item.code === this.$route.meta.code)
+      this.number = temp.code
+      this.tip = temp.tip
+      document.title = `${temp.code} ${temp.tip}`
+    } else {
+      this.getCode()
+      this.setTimer()
+      document.onvisibilitychange = () => {
+        if (document.visibilityState === 'hidden') {
+          clearInterval(this.timer)
+          document.title = '200 OK'
+        } else {
+          this.getCode()
+          this.setTimer()
+        }
       }
     }
   },
